@@ -45,6 +45,13 @@ variable "labels" {
   description = "Cluster Labels"
 }
 
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  sensitive   = false
+  description = "Cluster Tags"
+}
+
 variable "registries" {
   type = map(object({
     endpoint = string
@@ -56,11 +63,46 @@ variable "registries" {
   description = "Cluster Registries"
 }
 
-variable "connections" {
-  type        = list(any)
-  default     = []
+variable "server_size" {
+  type        = number
+  default     = 0
   sensitive   = false
-  description = "Cluster Connections"
+  description = "Cluster Server Size"
+}
+
+variable "server_type" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Cluster Server Type"
+}
+
+variable "server_image" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Cluster Server Image"
+}
+
+variable "server_location" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Cluster Server Location"
+}
+
+variable "network_id" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Cluster Network ID"
+}
+
+variable "subnet_id" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Cluster Subnet ID"
 }
 
 variable "extra_args" {
@@ -89,20 +131,6 @@ variable "post_create_user_data" {
   default     = ""
   sensitive   = false
   description = "Cluster Post-Create user-data"
-}
-
-variable "pre_destroy_user_data" {
-  type        = string
-  default     = ""
-  sensitive   = false
-  description = "Cluster Pre-Destroy user-data"
-}
-
-variable "post_destroy_user_data" {
-  type        = string
-  default     = ""
-  sensitive   = false
-  description = "Cluster Post-Destroy user-data"
 }
 
 variable "node_pools" {

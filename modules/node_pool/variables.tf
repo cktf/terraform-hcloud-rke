@@ -45,6 +45,13 @@ variable "labels" {
   description = "Node Pool Labels"
 }
 
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  sensitive   = false
+  description = "Node Pool Tags"
+}
+
 variable "registries" {
   type = map(object({
     endpoint = string
@@ -56,11 +63,46 @@ variable "registries" {
   description = "Node Pool Registries"
 }
 
-variable "connections" {
-  type        = list(any)
-  default     = []
+variable "server_size" {
+  type        = number
+  default     = 0
   sensitive   = false
-  description = "Node Pool Connections"
+  description = "Node Pool Server Size"
+}
+
+variable "server_type" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Node Pool Server Type"
+}
+
+variable "server_image" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Node Pool Server Image"
+}
+
+variable "server_location" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Cluster Server Location"
+}
+
+variable "network_id" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Node Pool Network ID"
+}
+
+variable "subnet_id" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Node Pool Subnet ID"
 }
 
 variable "extra_args" {
@@ -89,20 +131,6 @@ variable "post_create_user_data" {
   default     = ""
   sensitive   = false
   description = "Node Pool Post-Create user-data"
-}
-
-variable "pre_destroy_user_data" {
-  type        = string
-  default     = ""
-  sensitive   = false
-  description = "Node Pool Pre-Destroy user-data"
-}
-
-variable "post_destroy_user_data" {
-  type        = string
-  default     = ""
-  sensitive   = false
-  description = "Node Pool Post-Destroy user-data"
 }
 
 variable "join_host" {
