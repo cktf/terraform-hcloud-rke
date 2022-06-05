@@ -1,7 +1,7 @@
 output "host" {
   depends_on = [data.k8sbootstrap_auth.this]
 
-  value       = "https://${var.connections[0].host}:6443"
+  value       = "https://${hcloud_load_balancer.this.ipv4}:6443"
   sensitive   = false
   description = "Cluster Host"
 }
@@ -29,7 +29,7 @@ output "kubeconfig" {
 output "join_host" {
   depends_on = [data.k8sbootstrap_auth.this]
 
-  value       = "https://${var.connections[0].host}:6443"
+  value       = "https://${hcloud_load_balancer.this.network_ip}:6443"
   sensitive   = true
   description = "Cluster Join Host"
 }

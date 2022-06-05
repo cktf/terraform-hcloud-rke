@@ -23,8 +23,11 @@ resource "hcloud_server" "this" {
     pre_create_user_data  = var.pre_create_user_data
     post_create_user_data = var.post_create_user_data
 
-    join_host  = var.join_host
-    join_token = var.join_token
+    token_id      = random_string.token_id.result
+    token_secret  = random_string.token_secret.result
+    cluster_host  = "https://${hcloud_load_balancer.this.network_ip}:6443"
+    cluster_token = random_string.cluster_token.result
+    agent_token   = random_string.agent_token.result
   })
 }
 

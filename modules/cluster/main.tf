@@ -43,8 +43,8 @@ resource "random_string" "agent_token" {
 }
 
 data "k8sbootstrap_auth" "this" {
-  depends_on = [null_resource.pool]
+  depends_on = [hcloud_server.this]
 
-  server = "https://${var.connections[0].host}:6443"
+  server = "https://${hcloud_load_balancer.this.network_ip}:6443"
   token  = "${random_string.token_id.result}.${random_string.token_secret.result}"
 }

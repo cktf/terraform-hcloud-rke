@@ -25,33 +25,22 @@ module "rke" {
   labels = {
     platform = "linux"
   }
-  connections = [{
-    type     = "ssh"
-    host     = "192.168.172.185"
-    port     = 22
-    user     = "ubuntu"
-    password = "ubuntu"
-  }]
+  server_size     = 3
+  server_type     = "cx11"
+  server_image    = "debian-9"
+  server_location = "nbg1"
+  network_id      = "<YOUR-NETWORK-ID>"
+  subnet_id       = "<YOUR-SUBNET-ID>"
 
   node_pools = {
     pool1 = {
-      name = "node"
-      connections = [
-        {
-          type     = "ssh"
-          host     = "192.168.172.186"
-          port     = 22
-          user     = "ubuntu"
-          password = "ubuntu"
-        },
-        {
-          type     = "ssh"
-          host     = "192.168.172.187"
-          port     = 22
-          user     = "ubuntu"
-          password = "ubuntu"
-        }
-      ]
+      name            = "node"
+      server_size     = 5
+      server_type     = "cx11"
+      server_image    = "debian-9"
+      server_location = "nbg1"
+      network_id      = "<YOUR-NETWORK-ID>"
+      subnet_id       = "<YOUR-SUBNET-ID>"
     }
   }
 }
