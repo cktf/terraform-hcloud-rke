@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.2.1...1.2.2) (2022-07-19)
+
+
+### Bug Fixes
+
+* **CI/CD:** remove unused actions ([8ad17db](https://github.com/cktf/terraform-hcloud-rke/commit/8ad17db7f5f3b76e8be4fec3d5b41cbcdfde4856))
+
 ## [1.2.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.2.0...1.2.1) (2022-07-17)
 
 
