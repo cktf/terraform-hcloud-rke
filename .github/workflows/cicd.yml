@@ -12,23 +12,17 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
+            - uses: hashicorp/setup-terraform@v1
+              with:
+                  terraform_version: "1.1.4"
             - uses: actions/cache@v2
               with:
                   path: .terraform/
                   key: ${{ hashFiles('.terraform.lock.hcl') }}
-            - uses: actions/cache@v2
-              with:
-                  path: build/
-                  key: ${{ github.sha }}
-            - uses: hashicorp/setup-terraform@v1
-              with:
-                  terraform_version: "1.1.4"
 
             - run: terraform init
             - run: terraform fmt -check
             - run: terraform validate -no-color
-            - run: mkdir -p build
-            - run: cp -R .terraform.lock.hcl *.tf build
 
     test:
         needs: build
@@ -44,10 +38,6 @@ jobs:
         if: github.event_name == 'push'
         steps:
             - uses: actions/checkout@v3
-            - uses: actions/cache@v2
-              with:
-                  path: build/
-                  key: ${{ github.sha }}
             - uses: actions/setup-node@v3
               with:
                   node-version: 17
