@@ -5,6 +5,13 @@ variable "name" {
   description = "Cluster Name"
 }
 
+variable "zone" {
+  type        = string
+  default     = "eu-central"
+  sensitive   = false
+  description = "Cluster Zone"
+}
+
 variable "type" {
   type        = string
   default     = "k3s"
