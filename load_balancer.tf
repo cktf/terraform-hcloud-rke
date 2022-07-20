@@ -23,6 +23,6 @@ resource "hcloud_load_balancer_service" "this" {
 resource "hcloud_load_balancer_target" "this" {
   load_balancer_id = hcloud_load_balancer.this.id
   type             = "label_selector"
-  label_selector   = "rke,master,${var.name}"
+  label_selector   = "cluster=${var.name},role=master"
   use_private_ip   = true
 }

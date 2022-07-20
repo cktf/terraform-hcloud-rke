@@ -15,7 +15,7 @@ terraform {
     }
     k8sbootstrap = {
       source  = "nimbolus/k8sbootstrap"
-      version = "0.1.2"
+      version = "~> 0.1.2"
     }
   }
 }

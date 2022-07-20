@@ -10,10 +10,10 @@ resource "hcloud_server" "this" {
   server_type        = each.value.type
   image              = "ubuntu-20.04"
   location           = each.value.location
-  labels             = each.value.tags
   ssh_keys           = [hcloud_ssh_key.this.id]
   firewall_ids       = [hcloud_firewall.this.id]
   placement_group_id = hcloud_placement_group.this.id
+  labels             = merge(try(each.value.tags, {}), { cluster = var.name, role = "master" })
 
   public_net {
     ipv4_enabled = false
