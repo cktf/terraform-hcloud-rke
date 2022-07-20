@@ -24,11 +24,12 @@ resource "hcloud_server" "this" {
   }
 
   user_data = templatefile("${path.module}/templates/create.sh", {
-    name                  = "master-${each.key}"
-    type                  = var.type
-    channel               = var.channel
-    version               = var.version_
-    registries            = var.registries
+    name       = "master-${each.key}"
+    type       = var.type
+    channel    = var.channel
+    version    = var.version_
+    registries = var.registries
+
     taints                = try(each.value.taints, {})
     labels                = try(each.value.labels, {})
     extra_args            = try(each.value.extra_args, [])
@@ -36,6 +37,7 @@ resource "hcloud_server" "this" {
     pre_create_user_data  = try(each.value.pre_create_user_data, "")
     post_create_user_data = try(each.value.post_create_user_data, "")
 
+    leader        = (each.key == keys(var.masters)[0])
     token_id      = random_string.token_id.result
     token_secret  = random_string.token_secret.result
     cluster_host  = "https://${hcloud_load_balancer.this.ipv4}:6443"
