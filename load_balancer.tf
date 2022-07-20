@@ -21,6 +21,8 @@ resource "hcloud_load_balancer_service" "this" {
 }
 
 resource "hcloud_load_balancer_target" "this" {
+  depends_on = [hcloud_load_balancer_network.this]
+
   load_balancer_id = hcloud_load_balancer.this.id
   type             = "label_selector"
   label_selector   = "cluster=${var.name},role=master"
