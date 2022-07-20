@@ -1,27 +1,40 @@
-resource "hcloud_server" "this" {
-  depends_on = [hcloud_firewall.this]
-  count      = var.server_size
+resource "hcloud_placement_group" "this" {
+  name = var.name
+  type = "spread"
+}
 
-  name         = "${var.name}-${count.index}"
-  server_type  = var.server_type
-  image        = var.server_image
-  location     = var.server_location
-  labels       = var.tags
-  ssh_keys     = [hcloud_ssh_key.this.id]
-  firewall_ids = [hcloud_firewall.this.id]
+resource "hcloud_server" "this" {
+  for_each = var.masters
+
+  name               = "master-${each.key}"
+  server_type        = each.value.type
+  image              = "ubuntu-20.04"
+  location           = each.value.location
+  labels             = each.value.tags
+  ssh_keys           = [hcloud_ssh_key.this.id]
+  firewall_ids       = [hcloud_firewall.this.id]
+  placement_group_id = hcloud_placement_group.this.id
+
+  public_net {
+    ipv4_enabled = false
+    ipv6_enabled = false
+  }
+  network {
+    network_id = var.network_id
+  }
 
   user_data = templatefile("${path.module}/templates/create.sh", {
-    name                  = "${var.name}-${count.index}"
+    name                  = "master-${each.key}"
     type                  = var.type
-    version               = var.version_
     channel               = var.channel
-    taints                = var.taints
-    labels                = var.labels
+    version               = var.version_
     registries            = var.registries
-    extra_args            = var.extra_args
-    extra_envs            = var.extra_envs
-    pre_create_user_data  = var.pre_create_user_data
-    post_create_user_data = var.post_create_user_data
+    taints                = try(each.value.taints, {})
+    labels                = try(each.value.labels, {})
+    extra_args            = try(each.value.extra_args, [])
+    extra_envs            = try(each.value.extra_envs, {})
+    pre_create_user_data  = try(each.value.pre_create_user_data, "")
+    post_create_user_data = try(each.value.post_create_user_data, "")
 
     token_id      = random_string.token_id.result
     token_secret  = random_string.token_secret.result
@@ -32,9 +45,8 @@ resource "hcloud_server" "this" {
 }
 
 resource "hcloud_server_network" "this" {
-  count = var.server_size
+  for_each = var.masters
 
-  server_id  = hcloud_server.this[count.index].id
-  network_id = var.network_id
-  subnet_id  = var.subnet_id
+  server_id = hcloud_server.this[each.key].id
+  subnet_id = var.subnet_id
 }
