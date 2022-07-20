@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.0...1.3.1) (2022-07-20)
+
+
+### Bug Fixes
+
+* add master labels and selector to load balancer ([8e3e1db](https://github.com/cktf/terraform-hcloud-rke/commit/8e3e1db3869816ab95cb4456f7a40351e8346849))
+
 # [1.3.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.2.2...1.3.0) (2022-07-20)
 
 
