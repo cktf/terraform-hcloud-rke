@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.2...1.3.3) (2022-07-20)
+
+
+### Bug Fixes
+
+* add leader conditional variable to master ([9fc1f24](https://github.com/cktf/terraform-hcloud-rke/commit/9fc1f240582dfb7b60191fd73859e7ec65a4b745))
+
 ## [1.3.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.1...1.3.2) (2022-07-20)
 
 
