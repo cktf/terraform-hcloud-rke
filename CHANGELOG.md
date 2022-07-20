@@ -1,3 +1,18 @@
+# [1.3.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.2.2...1.3.0) (2022-07-20)
+
+
+### Bug Fixes
+
+* change firewall rules ([993a681](https://github.com/cktf/terraform-hcloud-rke/commit/993a68166a61e52ad4d287c4b07cd8c631072cd7))
+* change load balancer ipv4 ([6465ce6](https://github.com/cktf/terraform-hcloud-rke/commit/6465ce650b2141ecc1d36034df37e40451c40f38))
+* change load balancer network zone ([44a8680](https://github.com/cktf/terraform-hcloud-rke/commit/44a86801d1720a11c4785c8053da4ef6cb57c363))
+* upgrade terraform lock file ([9be5de8](https://github.com/cktf/terraform-hcloud-rke/commit/9be5de8444b458fe6ded4df9872f98c359ceeb9f))
+
+
+### Features
+
+* add placement group for masters ([c61bd17](https://github.com/cktf/terraform-hcloud-rke/commit/c61bd17ad9f76c76a4a7c715548967c255f0c452))
+
 ## [1.2.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.2.1...1.2.2) (2022-07-19)
 
 
