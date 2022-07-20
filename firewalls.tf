@@ -2,44 +2,46 @@ resource "hcloud_firewall" "this" {
   name = "${var.name} master"
 
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "2379"
+    port        = "22"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "SSH Server"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "2380"
+    port        = "2379"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "HA with embedded etcd"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "6443"
+    port        = "2380"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "HA with embedded etcd"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "9345"
+    port        = "6443"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "Kubernetes API Server"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "10250"
+    port        = "8472"
+    protocol    = "udp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "Flannel VXLAN"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "179"
-  }
-  rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "4789"
-  }
-  rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "5473"
+    port        = "10250"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "Kubelet metrics"
   }
 }
 
@@ -47,53 +49,45 @@ resource "hcloud_firewall" "node" {
   name = "${var.name} node"
 
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "80"
+    port        = "22"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "SSH Server"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "443"
+    port        = "80"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "Ingress Controller"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "2379"
+    port        = "443"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "Ingress Controller"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "2380"
+    port        = "6443"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "Kubernetes API Server"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "6443"
+    port        = "8472"
+    protocol    = "udp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "Flannel VXLAN"
   }
   rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "9345"
-  }
-  rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "10250"
-  }
-  rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "179"
-  }
-  rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "4789"
-  }
-  rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "5473"
+    port        = "10250"
+    protocol    = "tcp"
+    direction   = "in"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+    description = "Kubelet metrics"
   }
 }
