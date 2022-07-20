@@ -25,7 +25,7 @@ resource "hcloud_server" "this" {
 
     token_id      = random_string.token_id.result
     token_secret  = random_string.token_secret.result
-    cluster_host  = "https://${hcloud_load_balancer.this.network_ip}:6443"
+    cluster_host  = "https://${hcloud_load_balancer.this.ipv4}:6443"
     cluster_token = random_string.cluster_token.result
     agent_token   = random_string.agent_token.result
   })
