@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.1...1.3.2) (2022-07-20)
+
+
+### Bug Fixes
+
+* add load balancer target dependency to network connection ([30be69e](https://github.com/cktf/terraform-hcloud-rke/commit/30be69efee1e9da3a66dbbff037dd863c991adbe))
+
 ## [1.3.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.0...1.3.1) (2022-07-20)
 
 
