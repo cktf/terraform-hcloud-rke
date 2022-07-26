@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.5...1.3.6) (2022-07-26)
+
+
+### Bug Fixes
+
+* establish connection between servers using private ip of load balancer ([f291dce](https://github.com/cktf/terraform-hcloud-rke/commit/f291dce88b2557f0dd294e5383c22a21eb18217c))
+
 ## [1.3.5](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.4...1.3.5) (2022-07-26)
 
 
