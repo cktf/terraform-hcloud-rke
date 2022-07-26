@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.4...1.3.5) (2022-07-26)
+
+
+### Bug Fixes
+
+* add master servers to private network ([29a63de](https://github.com/cktf/terraform-hcloud-rke/commit/29a63de1335948f8742355b774034dd85fecc697))
+
 ## [1.3.4](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.3...1.3.4) (2022-07-26)
 
 
