@@ -17,10 +17,7 @@ resource "hcloud_server" "this" {
 
   public_net {
     ipv4_enabled = false
-    ipv6_enabled = false
-  }
-  network {
-    network_id = var.network_id
+    ipv6_enabled = true
   }
 
   user_data = templatefile("${path.module}/templates/create.sh", {
@@ -49,6 +46,7 @@ resource "hcloud_server" "this" {
 resource "hcloud_server_network" "this" {
   for_each = var.masters
 
-  server_id = hcloud_server.this[each.key].id
-  subnet_id = var.subnet_id
+  server_id  = hcloud_server.this[each.key].id
+  network_id = var.network_id
+  subnet_id  = var.subnet_id
 }
