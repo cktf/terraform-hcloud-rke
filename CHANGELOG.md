@@ -1,3 +1,10 @@
+## [1.3.8](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.7...1.3.8) (2022-07-26)
+
+
+### Bug Fixes
+
+* add hcloud_server_network attachment resource ([396c078](https://github.com/cktf/terraform-hcloud-rke/commit/396c078d565339767057c78d701f0bcc9cd36e70))
+
 ## [1.3.7](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.6...1.3.7) (2022-07-26)
 
 
