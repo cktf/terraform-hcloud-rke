@@ -18,6 +18,7 @@ cat <<-EOF | sed -r 's/^ {4}//' | tee /etc/rancher/${type}/config.yaml > /dev/nu
     write-kubeconfig-mode: "0644"
     kube-apiserver-arg: ["enable-bootstrap-token-auth"]
     tls-san: ["${private_ip}", "${public_ip}"]
+    node-ip: "$(hostname  -I | awk '{print $2}')"
     node-name: "${name}"
     node-label: [${join(",", [for key, val in labels : "\"${key}=${val}\""])}]
     node-taint: [${join(",", [for key, val in taints : "\"${key}=${val}\""])}]
@@ -82,9 +83,5 @@ EOF
 
 systemctl enable ${type}-server.service
 systemctl start ${type}-server.service
-
-apt update -y
-rm -Rf /var/lib/apt/lists/*
-rm -Rf /tmp/*
 
 ${post_create_user_data}
