@@ -56,13 +56,6 @@ variable "network_id" {
   description = "Cluster Network ID"
 }
 
-variable "subnet_id" {
-  type        = string
-  default     = ""
-  sensitive   = false
-  description = "Cluster Subnet ID"
-}
-
 variable "masters" {
   type        = map(any)
   default     = {}

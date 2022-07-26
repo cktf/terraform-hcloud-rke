@@ -30,7 +30,6 @@ module "rke" {
   server_image    = "debian-9"
   server_location = "nbg1"
   network_id      = "<YOUR-NETWORK-ID>"
-  subnet_id       = "<YOUR-SUBNET-ID>"
 
   node_pools = {
     pool1 = {
@@ -39,8 +38,6 @@ module "rke" {
       server_type     = "cx11"
       server_image    = "debian-9"
       server_location = "nbg1"
-      network_id      = "<YOUR-NETWORK-ID>"
-      subnet_id       = "<YOUR-SUBNET-ID>"
     }
   }
 }

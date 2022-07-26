@@ -10,7 +10,7 @@ resource "hcloud_load_balancer" "this" {
 
 resource "hcloud_load_balancer_network" "this" {
   load_balancer_id = hcloud_load_balancer.this.id
-  subnet_id        = var.subnet_id
+  network_id       = var.network_id
 }
 
 resource "hcloud_load_balancer_service" "this" {

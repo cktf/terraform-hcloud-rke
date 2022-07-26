@@ -42,10 +42,3 @@ resource "hcloud_server" "this" {
     agent_token   = random_string.agent_token.result
   })
 }
-
-resource "hcloud_server_network" "this" {
-  for_each = var.masters
-
-  server_id = hcloud_server.this[each.key].id
-  subnet_id = var.subnet_id
-}
