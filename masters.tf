@@ -15,10 +15,6 @@ resource "hcloud_server" "this" {
   placement_group_id = hcloud_placement_group.this.id
   labels             = merge(try(each.value.tags, {}), { cluster = var.name, role = "master" })
 
-  network {
-    network_id = var.network_id
-  }
-
   user_data = templatefile("${path.module}/templates/create.sh", {
     name       = "master-${each.key}"
     type       = var.type
@@ -41,4 +37,11 @@ resource "hcloud_server" "this" {
     cluster_token = random_string.cluster_token.result
     agent_token   = random_string.agent_token.result
   })
+}
+
+resource "hcloud_server_network" "this" {
+  for_each = var.masters
+
+  server_id  = hcloud_server.this[each.key].id
+  network_id = var.network_id
 }
