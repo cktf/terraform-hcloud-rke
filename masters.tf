@@ -34,9 +34,10 @@ resource "hcloud_server" "this" {
     post_create_user_data = try(each.value.post_create_user_data, "")
 
     leader        = (each.key == keys(var.masters)[0])
+    private_ip    = hcloud_load_balancer_network.this.ip
+    public_ip     = hcloud_load_balancer.this.ipv4
     token_id      = random_string.token_id.result
     token_secret  = random_string.token_secret.result
-    cluster_host  = "https://${hcloud_load_balancer.this.ipv4}:6443"
     cluster_token = random_string.cluster_token.result
     agent_token   = random_string.agent_token.result
   })

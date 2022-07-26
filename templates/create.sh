@@ -10,13 +10,14 @@ export INSTALL_${upper(type)}_CHANNEL="${channel}"
 
 export ${upper(type)}_TOKEN="${cluster_token}"
 export ${upper(type)}_AGENT_TOKEN="${agent_token}"
-export INSTALL_${upper(type)}_EXEC="${leader ? "server --cluster-init" : "server --server ${cluster_host}"} ${join(" ", extra_args)}"
+export INSTALL_${upper(type)}_EXEC="${leader ? "server --cluster-init" : "server --server https://${private_ip}:6443"} ${join(" ", extra_args)}"
 
 mkdir -p /etc/rancher/${type}
 mkdir -p /var/lib/rancher/${type}/server/manifests
 cat <<-EOF | sed -r 's/^ {4}//' | tee /etc/rancher/${type}/config.yaml > /dev/null
     write-kubeconfig-mode: "0644"
     kube-apiserver-arg: ["enable-bootstrap-token-auth"]
+    tls-san: ["${private_ip}", "${public_ip}"]
     node-name: "${name}"
     node-label: [${join(",", [for key, val in labels : "\"${key}=${val}\""])}]
     node-taint: [${join(",", [for key, val in taints : "\"${key}=${val}\""])}]
