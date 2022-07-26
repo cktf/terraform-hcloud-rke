@@ -1,3 +1,11 @@
+## [1.3.7](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.6...1.3.7) (2022-07-26)
+
+
+### Bug Fixes
+
+* add node-ip (private interface) to k3s config ([ab3388b](https://github.com/cktf/terraform-hcloud-rke/commit/ab3388b5f235db265933019affae20aa36df1657))
+* remove unused subnet_id variable ([ebda79b](https://github.com/cktf/terraform-hcloud-rke/commit/ebda79b42f990439a483004a9529fa2158995d75))
+
 ## [1.3.6](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.5...1.3.6) (2022-07-26)
 
 
