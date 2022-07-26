@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.3...1.3.4) (2022-07-26)
+
+
+### Bug Fixes
+
+* enable public ipv6 without any input bound rules ([32e36db](https://github.com/cktf/terraform-hcloud-rke/commit/32e36dbeefcd8c9085e0935fa8353b85840c523f))
+
 ## [1.3.3](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.2...1.3.3) (2022-07-20)
 
 
