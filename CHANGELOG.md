@@ -1,3 +1,11 @@
+## [1.3.10](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.9...1.3.10) (2022-07-27)
+
+
+### Bug Fixes
+
+* add dependency to network for master servers ([90897aa](https://github.com/cktf/terraform-hcloud-rke/commit/90897aa4a6dd2b40db4d6121c0e2a67a721c1a31))
+* create bootstrap service account and token ([6db31a1](https://github.com/cktf/terraform-hcloud-rke/commit/6db31a142781411fdd1f03ce14e58fb304e961ed))
+
 ## [1.3.9](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.8...1.3.9) (2022-07-27)
 
 
