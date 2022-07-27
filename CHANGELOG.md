@@ -1,3 +1,11 @@
+## [1.3.9](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.8...1.3.9) (2022-07-27)
+
+
+### Bug Fixes
+
+* change terraform lock file ([3cf6ae1](https://github.com/cktf/terraform-hcloud-rke/commit/3cf6ae166bab96478e3f14b6266ecae8067c9289))
+* syntax problem in bootstrap.yml manifest file ([9c8cfe6](https://github.com/cktf/terraform-hcloud-rke/commit/9c8cfe6c0a373da85af19e0afcfa832fc954926a))
+
 ## [1.3.8](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.7...1.3.8) (2022-07-26)
 
 
