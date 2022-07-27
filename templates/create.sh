@@ -64,8 +64,8 @@ cat <<-EOF | sed -r 's/^ {4}//' | tee /var/lib/rancher/${type}/server/manifests/
         name: bootstrap-admin
     subjects:
         - kind: Group
-            name: system:bootstrappers
-            apiGroup: rbac.authorization.k8s.io
+          name: system:bootstrappers
+          apiGroup: rbac.authorization.k8s.io
     roleRef:
         apiGroup: rbac.authorization.k8s.io
         kind: ClusterRole
