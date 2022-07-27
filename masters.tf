@@ -4,7 +4,8 @@ resource "hcloud_placement_group" "this" {
 }
 
 resource "hcloud_server" "this" {
-  for_each = var.masters
+  for_each   = var.masters
+  depends_on = [var.network_id]
 
   name               = "master-${each.key}"
   server_type        = each.value.type
