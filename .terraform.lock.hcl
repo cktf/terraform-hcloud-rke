@@ -65,7 +65,7 @@ provider "registry.terraform.io/hetznercloud/hcloud" {
 
 provider "registry.terraform.io/nimbolus/k8sbootstrap" {
   version     = "0.1.2"
-  constraints = "0.1.2"
+  constraints = "~> 0.1.2"
   hashes = [
     "h1:d2sZfuRLQzuFODS13FFjKOlv62rBail2CQ/VU4rYMRQ=",
     "zh:21f56d6d5d40405803bb887fd76c712b4e31d7a88e6e21dc8a79c215d60146f9",
