@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sleep 15
+
 ${pre_create_user_data}
 
 export INSTALL_${upper(type)}_NAME="server"
@@ -45,6 +47,19 @@ EOF
 cat <<-EOF | sed -r 's/^ {4}//' | tee /var/lib/rancher/${type}/server/manifests/bootstrap.yaml > /dev/null
     ---
     apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+        name: bootstrap
+    ---
+    apiVersion: v1
+    kind: Secret
+    metadata:
+        name: bootstrap-token
+        annotations:
+            kubernetes.io/service-account.name: bootstrap
+    type: kubernetes.io/service-account-token
+    ---
+    apiVersion: v1
     kind: Secret
     metadata:
         name: bootstrap-token-${token_id}
@@ -69,7 +84,7 @@ cat <<-EOF | sed -r 's/^ {4}//' | tee /var/lib/rancher/${type}/server/manifests/
     roleRef:
         apiGroup: rbac.authorization.k8s.io
         kind: ClusterRole
-        name: cluster-admin    
+        name: cluster-admin
 EOF
 %{ endif }
 

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sleep 15
+
 ${pre_create_user_data}
 
 export INSTALL_${upper(type)}_NAME="agent"
