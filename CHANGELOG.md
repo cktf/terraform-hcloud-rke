@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.1...1.4.2) (2022-07-28)
+
+
+### Bug Fixes
+
+* syntax problem in comment section of ccm.yml ([072c3c3](https://github.com/cktf/terraform-hcloud-rke/commit/072c3c3d8dcbceae99763dfbcf9e9a27de342955))
+
 ## [1.4.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.0...1.4.1) (2022-07-28)
 
 
