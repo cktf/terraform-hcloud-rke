@@ -25,7 +25,7 @@ cat <<-EOF | sed -r 's/^ {4}//' | tee /etc/rancher/${type}/config.yaml > /dev/nu
     flannel-backend: "host-gw"
     tls-san: ["${private_ip}", "${public_ip}"]
     node-ip: "$(hostname  -I | awk '{print $2}')"
-    node-name: "${name}"
+    node-name: "$(hostname -f)"
     node-label: [${join(",", [for key, val in labels : "\"${key}=${val}\""])}]
     node-taint: [${join(",", [for key, val in taints : "\"${key}=${val}\""])}]
 EOF

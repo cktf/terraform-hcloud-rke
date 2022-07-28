@@ -56,13 +56,6 @@ variable "network_id" {
   description = "Cluster Network ID"
 }
 
-variable "network_name" {
-  type        = string
-  default     = ""
-  sensitive   = false
-  description = "Cluster Network Name"
-}
-
 variable "hcloud_token" {
   type        = string
   default     = ""

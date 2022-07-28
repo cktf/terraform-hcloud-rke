@@ -17,7 +17,6 @@ resource "hcloud_server" "this" {
   labels             = merge(try(each.value.tags, {}), { cluster = var.name, role = "master" })
 
   user_data = templatefile("${path.module}/templates/create.sh", {
-    name       = "master-${each.key}"
     type       = var.type
     channel    = var.channel
     version    = var.version_
@@ -42,7 +41,7 @@ resource "hcloud_server" "this" {
     })
     hcloud_file = templatefile("${path.module}/templates/manifests/hcloud.yml", {
       hcloud_token   = var.hcloud_token
-      hcloud_network = var.network_name
+      hcloud_network = var.network_id
     })
     ccm_file = templatefile("${path.module}/templates/manifests/ccm.yml", {})
     csi_file = templatefile("${path.module}/templates/manifests/csi.yml", {})

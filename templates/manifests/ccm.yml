@@ -50,10 +50,13 @@ spec:
                 # cloud controller manages should be able to run on masters
                 - key: "node-role.kubernetes.io/master"
                   effect: NoSchedule
+                  operator: Exists
                 - key: "node-role.kubernetes.io/control-plane"
                   effect: NoSchedule
+                  operator: Exists
                 - key: "node.kubernetes.io/not-ready"
                   effect: "NoSchedule"
+            hostNetwork: true
             containers:
                 - image: hetznercloud/hcloud-cloud-controller-manager:v1.12.1
                   name: hcloud-cloud-controller-manager
@@ -62,6 +65,8 @@ spec:
                       - "--cloud-provider=hcloud"
                       - "--leader-elect=false"
                       - "--allow-untagged-cloud"
+                      - "--allocate-node-cidrs=true"
+                      - "--cluster-cidr=10.244.0.0/16"
                   resources:
                       requests:
                           cpu: 100m
@@ -76,3 +81,8 @@ spec:
                             secretKeyRef:
                                 name: hcloud
                                 key: token
+                      - name: HCLOUD_NETWORK
+                        valueFrom:
+                            secretKeyRef:
+                                name: hcloud
+                                key: network
