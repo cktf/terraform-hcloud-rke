@@ -54,7 +54,7 @@ EOF
 cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/hcloud.yaml > /dev/null
 ${hcloud_file}
 EOF
-cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/ccm.yaml > /dev/null
+cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/hccm.yaml > /dev/null
 ${ccm_file}
 EOF
 cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/csi.yaml > /dev/null
