@@ -18,7 +18,11 @@ mkdir -p /etc/rancher/${type}
 mkdir -p /var/lib/rancher/${type}/server/manifests
 cat <<-EOF | sed -r 's/^ {4}//' | tee /etc/rancher/${type}/config.yaml > /dev/null
     write-kubeconfig-mode: "0644"
+    disable: ["traefik", "servicelb", "local-storage"]
     kube-apiserver-arg: ["enable-bootstrap-token-auth"]
+    kubelet-arg: ["cloud-provider=external"]
+    disable-cloud-controller: true
+    flannel-backend: "host-gw"
     tls-san: ["${private_ip}", "${public_ip}"]
     node-ip: "$(hostname  -I | awk '{print $2}')"
     node-name: "${name}"
@@ -44,47 +48,17 @@ cat <<-EOF | sed -r 's/^ {4}//' | tee /etc/rancher/${type}/registries.yaml > /de
 EOF
 
 %{ if leader }
-cat <<-EOF | sed -r 's/^ {4}//' | tee /var/lib/rancher/${type}/server/manifests/bootstrap.yaml > /dev/null
-    ---
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-        name: bootstrap
-    ---
-    apiVersion: v1
-    kind: Secret
-    metadata:
-        name: bootstrap-token
-        annotations:
-            kubernetes.io/service-account.name: bootstrap
-    type: kubernetes.io/service-account-token
-    ---
-    apiVersion: v1
-    kind: Secret
-    metadata:
-        name: bootstrap-token-${token_id}
-        namespace: kube-system
-    type: bootstrap.kubernetes.io/token
-    stringData:
-        description: "bootstrap token"
-        token-id: ${token_id}
-        token-secret: ${token_secret}
-        usage-bootstrap-authentication: "true"
-        usage-bootstrap-signing: "true"
-        auth-extra-groups: system:bootstrappers:worker,system:bootstrappers:ingress
-    ---
-    apiVersion: rbac.authorization.k8s.io/v1
-    kind: ClusterRoleBinding
-    metadata:
-        name: bootstrap-admin
-    subjects:
-        - kind: Group
-          name: system:bootstrappers
-          apiGroup: rbac.authorization.k8s.io
-    roleRef:
-        apiGroup: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: cluster-admin
+cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/bootstrap.yaml > /dev/null
+${bootstrap_file}
+EOF
+cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/hcloud.yaml > /dev/null
+${hcloud_file}
+EOF
+cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/ccm.yaml > /dev/null
+${ccm_file}
+EOF
+cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/csi.yaml > /dev/null
+${csi_file}
 EOF
 %{ endif }
 

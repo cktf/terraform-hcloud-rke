@@ -16,6 +16,7 @@ export INSTALL_${upper(type)}_EXEC="agent ${join(" ", extra_args)}"
 
 mkdir -p /etc/rancher/${type}
 cat <<-EOF | sed -r 's/^ {8}//' | tee /etc/rancher/${type}/config.yaml > /dev/null
+    kubelet-arg: ["cloud-provider=external"]
     node-ip: "$(hostname  -I | awk '{print $2}')"
     node-name: "${name}"
     node-label: [${join(",", [for key, val in labels : "\"${key}=${val}\""])}]

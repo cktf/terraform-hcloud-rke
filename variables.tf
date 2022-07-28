@@ -26,14 +26,14 @@ variable "type" {
 
 variable "channel" {
   type        = string
-  default     = ""
+  default     = "latest"
   sensitive   = false
   description = "Cluster Channel"
 }
 
 variable "version_" {
   type        = string
-  default     = ""
+  default     = "v1.24.3+k3s1"
   sensitive   = false
   description = "Cluster Version"
 }
@@ -54,6 +54,20 @@ variable "network_id" {
   default     = ""
   sensitive   = false
   description = "Cluster Network ID"
+}
+
+variable "network_name" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Cluster Network Name"
+}
+
+variable "hcloud_token" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Cluster HCloud Token"
 }
 
 variable "masters" {
