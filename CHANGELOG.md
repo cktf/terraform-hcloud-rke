@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.3...1.4.4) (2022-07-28)
+
+
+### Bug Fixes
+
+* add support for networks in CCM plugin ([ee252eb](https://github.com/cktf/terraform-hcloud-rke/commit/ee252ebfa0cb0699a369bc61a02ea8f9d313a7f1))
+
 ## [1.4.3](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.2...1.4.3) (2022-07-28)
 
 
