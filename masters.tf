@@ -36,16 +36,16 @@ resource "hcloud_server" "this" {
     cluster_token = random_string.cluster_token.result
     agent_token   = random_string.agent_token.result
 
-    bootstrap_file = templatefile("${path.module}/templates/manifests/bootstrap.sh", {
+    bootstrap_file = templatefile("${path.module}/templates/manifests/bootstrap.yml", {
       token_id     = random_string.token_id.result
       token_secret = random_string.token_secret.result
     })
-    hcloud_file = templatefile("${path.module}/templates/manifests/hcloud.sh", {
+    hcloud_file = templatefile("${path.module}/templates/manifests/hcloud.yml", {
       hcloud_token   = var.hcloud_token
       hcloud_network = var.network_name
     })
-    ccm_file = templatefile("${path.module}/templates/manifests/ccm.sh", {})
-    csi_file = templatefile("${path.module}/templates/manifests/csi.sh", {})
+    ccm_file = templatefile("${path.module}/templates/manifests/ccm.yml", {})
+    csi_file = templatefile("${path.module}/templates/manifests/csi.yml", {})
   })
 }
 
