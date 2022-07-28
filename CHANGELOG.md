@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.10...1.4.0) (2022-07-28)
+
+
+### Bug Fixes
+
+* change template files pat ([666c05d](https://github.com/cktf/terraform-hcloud-rke/commit/666c05d8d605ddd2f53c721bcad5690a5c590b9f))
+
+
+### Features
+
+* add ccm, csi manifests for hcloud ([ca82c34](https://github.com/cktf/terraform-hcloud-rke/commit/ca82c340b8483227fb2868feab491f0530a95e04))
+
 ## [1.3.10](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.9...1.3.10) (2022-07-27)
 
 
