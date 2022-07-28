@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.0...1.4.1) (2022-07-28)
+
+
+### Bug Fixes
+
+* change line endings to LF ([0520692](https://github.com/cktf/terraform-hcloud-rke/commit/052069269f1608d542098be98caa0b3a796583ba))
+
 # [1.4.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.3.10...1.4.0) (2022-07-28)
 
 
