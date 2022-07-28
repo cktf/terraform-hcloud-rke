@@ -1,3 +1,11 @@
+## [1.4.5](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.4...1.4.5) (2022-07-28)
+
+
+### Bug Fixes
+
+* change secretKeyRef (Hetzner Bad Document) ([44e429c](https://github.com/cktf/terraform-hcloud-rke/commit/44e429cda7d8b35f23033ddf61179216b078a1c7))
+* syntax problem after variable binding in hcloud.yml ([82230a4](https://github.com/cktf/terraform-hcloud-rke/commit/82230a4ae456b4497e63c216660136fa141a0934))
+
 ## [1.4.4](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.3...1.4.4) (2022-07-28)
 
 
