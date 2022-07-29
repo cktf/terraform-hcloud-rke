@@ -1,3 +1,11 @@
+## [1.4.6](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.5...1.4.6) (2022-07-29)
+
+
+### Bug Fixes
+
+* change flannel interface to private inet ([4f856e4](https://github.com/cktf/terraform-hcloud-rke/commit/4f856e45f32811986a1e0e55351717b63adf75d6))
+* server install command ([e28e667](https://github.com/cktf/terraform-hcloud-rke/commit/e28e66789f6adcf20a0bce394131eb36b3b80922))
+
 ## [1.4.5](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.4...1.4.5) (2022-07-28)
 
 
