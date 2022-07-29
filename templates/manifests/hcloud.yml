@@ -7,3 +7,7 @@ metadata:
 stringData:
     token: "${hcloud_token}"
     network: "${hcloud_network}"
+    ssh_key: "${hcloud_ssh_key}"
+    firewall: "${hcloud_firewall}"
+    node_pools: "${hcloud_node_pools}"
+    cloud_init: "${hcloud_cloud_init}"

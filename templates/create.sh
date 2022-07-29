@@ -61,6 +61,9 @@ EOF
 cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/csi.yaml > /dev/null
 ${csi_file}
 EOF
+cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/ca.yaml > /dev/null
+${ca_file}
+EOF
 %{ endif }
 
 curl -sfL https://get.${type}.io | sh -

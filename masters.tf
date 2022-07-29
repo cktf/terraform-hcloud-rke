@@ -41,13 +41,25 @@ resource "hcloud_server" "this" {
       token_secret = random_string.token_secret.result
     })
     hcloud_file = templatefile("${path.module}/templates/manifests/hcloud.yml", {
-      hcloud_token   = var.hcloud_token
-      hcloud_network = var.network_id
+      hcloud_token      = var.hcloud_token
+      hcloud_network    = var.network_id
+      hcloud_ssh_key    = hcloud_ssh_key.this.id
+      hcloud_firewall   = hcloud_firewall.this.id
+      hcloud_node_pools = join(" ", [for key, val in var.node_pools : "--nodes=${val.min_size}:${val.max_size}:${val.type}:${val.location}:${key}"])
+      hcloud_cloud_init = base64encode(templatefile("${path.module}/templates/node.sh", {
+        type       = var.type
+        channel    = var.channel
+        version    = var.version_
+        registries = var.registries
+        join_host  = hcloud_load_balancer_network.this.ip
+        join_token = random_string.agent_token.result
+      }))
     })
     ccm_file = templatefile("${path.module}/templates/manifests/ccm.yml", {
       pods_cidr = var.pods_cidr
     })
     csi_file = templatefile("${path.module}/templates/manifests/csi.yml", {})
+    ca_file  = templatefile("${path.module}/templates/manifests/ca.yml", {})
   })
 }
 
