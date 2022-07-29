@@ -49,6 +49,13 @@ variable "registries" {
   description = "Cluster Registries"
 }
 
+variable "pods_cidr" {
+  type        = string
+  default     = "10.244.0.0/16"
+  sensitive   = false
+  description = "Cluster Pods CIDR"
+}
+
 variable "network_id" {
   type        = string
   default     = ""

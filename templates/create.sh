@@ -23,7 +23,7 @@ cat <<-EOF | sed -r 's/^ {4}//' | tee /etc/rancher/${type}/config.yaml > /dev/nu
     kube-apiserver-arg: ["enable-bootstrap-token-auth"]
     kubelet-arg: ["cloud-provider=external"]
     tls-san: ["${private_ip}", "${public_ip}"]
-    cluster-cidr: "10.0.0.0/8"
+    cluster-cidr: "${pods_cidr}"
     flannel-iface: "$(ip a | grep $(hostname -I | awk '{print $2}') | awk '{print $NF}')"
     node-ip: "$(hostname -I | awk '{print $2}')"
     node-name: "$(hostname -f)"

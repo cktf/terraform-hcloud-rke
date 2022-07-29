@@ -21,6 +21,7 @@ resource "hcloud_server" "this" {
     channel    = var.channel
     version    = var.version_
     registries = var.registries
+    pods_cidr  = var.pods_cidr
 
     taints                = try(each.value.taints, {})
     labels                = try(each.value.labels, {})
@@ -43,7 +44,9 @@ resource "hcloud_server" "this" {
       hcloud_token   = var.hcloud_token
       hcloud_network = var.network_id
     })
-    ccm_file = templatefile("${path.module}/templates/manifests/ccm.yml", {})
+    ccm_file = templatefile("${path.module}/templates/manifests/ccm.yml", {
+      pods_cidr = var.pods_cidr
+    })
     csi_file = templatefile("${path.module}/templates/manifests/csi.yml", {})
   })
 }
