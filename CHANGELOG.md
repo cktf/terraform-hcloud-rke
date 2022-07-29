@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.6...1.5.0) (2022-07-29)
+
+
+### Features
+
+* add pods_cidr range variable ([417d6ed](https://github.com/cktf/terraform-hcloud-rke/commit/417d6ed262f4852301c9fdb32287191713ac7706))
+
 ## [1.4.6](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.5...1.4.6) (2022-07-29)
 
 
