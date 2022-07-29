@@ -18,13 +18,14 @@ mkdir -p /etc/rancher/${type}
 mkdir -p /var/lib/rancher/${type}/server/manifests
 cat <<-EOF | sed -r 's/^ {4}//' | tee /etc/rancher/${type}/config.yaml > /dev/null
     write-kubeconfig-mode: "0644"
+    disable-cloud-controller: true
     disable: ["traefik", "servicelb", "local-storage"]
     kube-apiserver-arg: ["enable-bootstrap-token-auth"]
     kubelet-arg: ["cloud-provider=external"]
-    disable-cloud-controller: true
-    flannel-backend: "host-gw"
     tls-san: ["${private_ip}", "${public_ip}"]
-    node-ip: "$(hostname  -I | awk '{print $2}')"
+    cluster-cidr: "10.0.0.0/8"
+    flannel-iface: "$(ip a | grep $(hostname -I | awk '{print $2}') | awk '{print $NF}')"
+    node-ip: "$(hostname -I | awk '{print $2}')"
     node-name: "$(hostname -f)"
     node-label: [${join(",", [for key, val in labels : "\"${key}=${val}\""])}]
     node-taint: [${join(",", [for key, val in taints : "\"${key}=${val}\""])}]
