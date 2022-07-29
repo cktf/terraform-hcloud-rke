@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.5.0...1.6.0) (2022-07-29)
+
+
+### Features
+
+* add cluster-autoscaler manifest ([9c528a6](https://github.com/cktf/terraform-hcloud-rke/commit/9c528a62517dd7d8a620d1755813ae93284ca846))
+
 # [1.5.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.4.6...1.5.0) (2022-07-29)
 
 
