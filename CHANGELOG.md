@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.1...1.7.2) (2022-07-31)
+
+
+### Bug Fixes
+
+* use one label selector for firewall rules ([7267dab](https://github.com/cktf/terraform-hcloud-rke/commit/7267dabe7b9bec0667de81b65160b7d4514f58d6))
+
 ## [1.7.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.0...1.7.1) (2022-07-31)
 
 
