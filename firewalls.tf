@@ -25,7 +25,7 @@ resource "hcloud_firewall" "this" {
 
 resource "hcloud_firewall_attachment" "this" {
   firewall_id = hcloud_firewall.this.id
-  label_selectors = [
+  label_selectors = concat(["cluster=${var.name},role=master"], [
     for key, val in var.node_pools : "hcloud/node-group=${key}"
-  ]
+  ])
 }
