@@ -66,7 +66,7 @@ resource "hcloud_server" "this" {
     cluster_token = random_string.cluster_token.result
     agent_token   = random_string.agent_token.result
 
-    bootstrap_file = local.boostrap_file
+    bootstrap_file = local.bootstrap_file
     ccm_file       = local.ccm_file
     csi_file       = local.csi_file
     ca_file        = local.ca_file
