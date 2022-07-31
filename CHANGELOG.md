@@ -1,3 +1,16 @@
+# [1.7.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.6.0...1.7.0) (2022-07-31)
+
+
+### Bug Fixes
+
+* add toleration and affinity to hcloud-csi-controller StatefulSet ([a55a592](https://github.com/cktf/terraform-hcloud-rke/commit/a55a59279cbd3ed64749d423754f1892e49d5809))
+* change variable name ([9658cec](https://github.com/cktf/terraform-hcloud-rke/commit/9658cec251158b3b02594b311eaeb9c58379e9b7))
+
+
+### Features
+
+* add manifests to runtime condition block ([dd494e7](https://github.com/cktf/terraform-hcloud-rke/commit/dd494e7d31ec622a5e9ea8d87ef29d4a718f5991))
+
 # [1.6.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.5.0...1.6.0) (2022-07-29)
 
 
