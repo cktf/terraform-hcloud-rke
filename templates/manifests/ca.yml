@@ -176,8 +176,6 @@ spec:
                         value: "${hcloud_network}"
                       - name: HCLOUD_SSH_KEY
                         value: "${hcloud_ssh_key}"
-                      - name: HCLOUD_FIREWALL
-                        value: "${hcloud_firewall}"
                       - name: HCLOUD_CLOUD_INIT
                         value: "${hcloud_cloud_init}"
                   volumeMounts:

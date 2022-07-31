@@ -15,7 +15,6 @@ locals {
     hcloud_token      = var.hcloud_token
     hcloud_network    = var.network_id
     hcloud_ssh_key    = hcloud_ssh_key.this.id
-    hcloud_firewall   = hcloud_firewall.this.id
     hcloud_node_pools = var.node_pools
     hcloud_cloud_init = base64encode(templatefile("${path.module}/templates/node.sh", {
       type       = var.type

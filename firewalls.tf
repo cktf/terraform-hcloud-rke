@@ -22,3 +22,10 @@ resource "hcloud_firewall" "this" {
     description     = "UDP Internet Traffic"
   }
 }
+
+resource "hcloud_firewall_attachment" "this" {
+  for_each = var.node_pools
+
+  firewall_id     = hcloud_firewall.this.id
+  label_selectors = ["hcloud/node-group=${each.key}"]
+}
