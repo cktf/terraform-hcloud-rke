@@ -12,7 +12,7 @@ export INSTALL_${upper(type)}_CHANNEL="${channel}"
 
 export ${upper(type)}_TOKEN="${cluster_token}"
 export ${upper(type)}_AGENT_TOKEN="${agent_token}"
-export INSTALL_${upper(type)}_EXEC="server ${leader ? "--cluster-init" : "--server https://${private_ip}:6443"} ${join(" ", extra_args)}"
+export INSTALL_${upper(type)}_EXEC="server ${leader ? "--cluster-init" : "--server https://${private_ip}:6443"} ${join(" ", extra_args)} --node-taint node-role.kubernetes.io/master:NoSchedule"
 
 mkdir -p /etc/rancher/${type}
 mkdir -p /var/lib/rancher/${type}/server/manifests
@@ -48,12 +48,9 @@ cat <<-EOF | sed -r 's/^ {4}//' | tee /etc/rancher/${type}/registries.yaml > /de
     %{ endfor }
 EOF
 
-%{ if leader }
+if [ "${leader}" = "true" ]; then
 cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/bootstrap.yaml > /dev/null
 ${bootstrap_file}
-EOF
-cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/hcloud.yaml > /dev/null
-${hcloud_file}
 EOF
 cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/hccm.yaml > /dev/null
 ${ccm_file}
@@ -64,7 +61,7 @@ EOF
 cat <<-EOF | tee /var/lib/rancher/${type}/server/manifests/ca.yaml > /dev/null
 ${ca_file}
 EOF
-%{ endif }
+fi
 
 curl -sfL https://get.${type}.io | sh -
 

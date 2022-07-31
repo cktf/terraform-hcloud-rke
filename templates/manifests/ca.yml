@@ -164,47 +164,27 @@ spec:
                       - ./cluster-autoscaler
                       - --cloud-provider=hetzner
                       - --stderrthreshold=info
-                      - $HCLOUD_NODE_POOLS
+                      %{ for key, val in hcloud_node_pools }
+                      - --nodes=${val.min_size}:${val.max_size}:${val.type}:${val.location}:${key}
+                      %{ endfor }
                   env:
                       - name: HCLOUD_IMAGE
                         value: "ubuntu-20.04"
                       - name: HCLOUD_TOKEN
-                        valueFrom:
-                            secretKeyRef:
-                                name: hcloud
-                                key: token
+                        value: "${hcloud_token}"
                       - name: HCLOUD_NETWORK
-                        valueFrom:
-                            secretKeyRef:
-                                name: hcloud
-                                key: network
+                        value: "${hcloud_network}"
                       - name: HCLOUD_SSH_KEY
-                        valueFrom:
-                            secretKeyRef:
-                                name: hcloud
-                                key: ssh_key
+                        value: "${hcloud_ssh_key}"
                       - name: HCLOUD_FIREWALL
-                        valueFrom:
-                            secretKeyRef:
-                                name: hcloud
-                                key: firewall
-                      - name: HCLOUD_NODE_POOLS
-                        valueFrom:
-                            secretKeyRef:
-                                name: hcloud
-                                key: node_pools
+                        value: "${hcloud_firewall}"
                       - name: HCLOUD_CLOUD_INIT
-                        valueFrom:
-                            secretKeyRef:
-                                name: hcloud
-                                key: cloud_init
+                        value: "${hcloud_cloud_init}"
                   volumeMounts:
                       - name: ssl-certs
                         mountPath: /etc/ssl/certs/ca-certificates.crt
                         readOnly: true
                   imagePullPolicy: "Always"
-            imagePullSecrets:
-                - name: gitlab-registry
             volumes:
                 - name: ssl-certs
                   hostPath:

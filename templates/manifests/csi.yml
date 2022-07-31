@@ -177,10 +177,7 @@ spec:
                                 apiVersion: v1
                                 fieldPath: spec.nodeName
                       - name: HCLOUD_TOKEN
-                        valueFrom:
-                            secretKeyRef:
-                                name: hcloud
-                                key: token
+                        value: "${hcloud_token}"
                   volumeMounts:
                       - name: socket-dir
                         mountPath: /run/csi
@@ -275,10 +272,7 @@ spec:
                       - name: ENABLE_METRICS
                         value: "true"
                       - name: HCLOUD_TOKEN
-                        valueFrom:
-                            secretKeyRef:
-                                name: hcloud
-                                key: token
+                        value: "${hcloud_token}"
                       - name: KUBE_NODE_NAME
                         valueFrom:
                             fieldRef:
