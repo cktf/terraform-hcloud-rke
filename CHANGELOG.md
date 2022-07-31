@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.0...1.7.1) (2022-07-31)
+
+
+### Bug Fixes
+
+* set firewall on worker nodes using label selector ([a89e785](https://github.com/cktf/terraform-hcloud-rke/commit/a89e785cb509b9781878ddcfdb84e2ba5ef2661c))
+
 # [1.7.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.6.0...1.7.0) (2022-07-31)
 
 
