@@ -1,3 +1,11 @@
+## [1.7.3](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.2...1.7.3) (2022-07-31)
+
+
+### Bug Fixes
+
+* firewall attachment to workers using label selectors ([102c0d0](https://github.com/cktf/terraform-hcloud-rke/commit/102c0d074ce0beac4ede57b82cac1714eae2faf7))
+* syntax problem in concat function firewall label selector ([d088d8d](https://github.com/cktf/terraform-hcloud-rke/commit/d088d8d408f3caea6722f2bf9463eb7bc3966a4e))
+
 ## [1.7.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.1...1.7.2) (2022-07-31)
 
 
