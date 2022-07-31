@@ -21,11 +21,18 @@ resource "hcloud_firewall" "this" {
     destination_ips = ["0.0.0.0/0", "::/0"]
     description     = "UDP Internet Traffic"
   }
-}
 
-resource "hcloud_firewall_attachment" "this" {
-  firewall_id = hcloud_firewall.this.id
-  label_selectors = concat(["cluster=${var.name},role=master"], [
-    for key, val in var.node_pools : "hcloud/node-group=${key}"
-  ])
+  dynamic "apply_to" {
+    for_each = var.masters
+    content {
+      server = hcloud_server.this[apply_to.key].id
+    }
+  }
+
+  dynamic "apply_to" {
+    for_each = var.node_pools
+    content {
+      label_selector = "hcloud/node-group=${apply_to.key}"
+    }
+  }
 }
