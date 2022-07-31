@@ -1,3 +1,11 @@
+## [1.7.4](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.3...1.7.4) (2022-07-31)
+
+
+### Bug Fixes
+
+* attach firewall to master servers using label selector ([c532b05](https://github.com/cktf/terraform-hcloud-rke/commit/c532b058d5ad4ec8c178a7e4e19fe04220b2614f))
+* replace firewall attachment with apply_to in firewall ([c985ca0](https://github.com/cktf/terraform-hcloud-rke/commit/c985ca00de88fd609fe5cd09ae65dd8b93fbc279))
+
 ## [1.7.3](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.2...1.7.3) (2022-07-31)
 
 
