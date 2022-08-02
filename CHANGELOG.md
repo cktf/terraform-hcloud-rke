@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.0...1.8.1) (2022-08-02)
+
+
+### Bug Fixes
+
+* remove firewall_attachment resource (destroy bug) ([472a428](https://github.com/cktf/terraform-hcloud-rke/commit/472a4286af29db95b84a642ab52863a2d3182542))
+
 # [1.8.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.5...1.8.0) (2022-08-02)
 
 
