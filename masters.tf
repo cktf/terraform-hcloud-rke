@@ -12,6 +12,7 @@ locals {
     hcloud_token = var.hcloud_token
   })
   ca_file = templatefile("${path.module}/templates/manifests/ca.yml", {
+    hcloud_name       = var.name
     hcloud_token      = var.hcloud_token
     hcloud_network    = var.network_id
     hcloud_ssh_key    = hcloud_ssh_key.this.id

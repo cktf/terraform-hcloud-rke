@@ -29,6 +29,6 @@ resource "hcloud_firewall_attachment" "this" {
     for key, val in var.masters : hcloud_server.this[key].id
   ]
   label_selectors = [
-    for key, val in var.node_pools : "hcloud/node-group=${key}"
+    for key, val in var.node_pools : "hcloud/node-group=${var.name}-${key}"
   ]
 }

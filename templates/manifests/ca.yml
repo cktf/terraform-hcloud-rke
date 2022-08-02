@@ -165,7 +165,7 @@ spec:
                       - --cloud-provider=hetzner
                       - --stderrthreshold=info
                       %{ for key, val in hcloud_node_pools }
-                      - --nodes=${val.min_size}:${val.max_size}:${val.type}:${val.location}:${key}
+                      - --nodes=${val.min_size}:${val.max_size}:${val.type}:${val.location}:${hcloud_name}-${key}
                       %{ endfor }
                   env:
                       - name: HCLOUD_IMAGE
