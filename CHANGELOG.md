@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.1...1.8.2) (2022-08-02)
+
+
+### Bug Fixes
+
+* change template sh file names ([d4920e3](https://github.com/cktf/terraform-hcloud-rke/commit/d4920e3eac009e0c26732ec2aa5bacab9684c934))
+
 ## [1.8.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.0...1.8.1) (2022-08-02)
 
 
