@@ -1,3 +1,17 @@
+# [1.8.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.5...1.8.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* attach firewall to master servers before boot ([1e5d2f2](https://github.com/cktf/terraform-hcloud-rke/commit/1e5d2f2ee2c54fcd69e7f12aa28da98647868946))
+* disable alb http, provision using CCM helm deploy (manually) ([f17f747](https://github.com/cktf/terraform-hcloud-rke/commit/f17f7479b4c5cea5194fa7bde1f4545c4deb226b))
+* disable servicelb, traefik charts ([2c574ec](https://github.com/cktf/terraform-hcloud-rke/commit/2c574ecc0825cd1686d0a5948865483320b40028))
+
+
+### Features
+
+* add cluster name as prefix to node-group names ([9920798](https://github.com/cktf/terraform-hcloud-rke/commit/99207981823a163a0a70341d27aeb26588a10666))
+
 ## [1.7.5](https://github.com/cktf/terraform-hcloud-rke/compare/1.7.4...1.7.5) (2022-07-31)
 
 
