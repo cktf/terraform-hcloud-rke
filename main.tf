@@ -17,9 +17,5 @@ terraform {
       source  = "nimbolus/k8sbootstrap"
       version = "~> 0.1.2"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2.12.1"
-    }
   }
 }
