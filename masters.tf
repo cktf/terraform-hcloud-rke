@@ -41,8 +41,9 @@ resource "hcloud_server" "this" {
   image              = "ubuntu-20.04"
   location           = each.value.location
   ssh_keys           = [hcloud_ssh_key.this.id]
+  firewall_ids       = [hcloud_firewall.this.id]
   placement_group_id = hcloud_placement_group.this.id
-  labels             = merge(try(each.value.tags, {}), { cluster = var.name, role = "master" })
+  labels             = merge(try(each.value.tags, {}), { "hcloud/master" = var.name })
 
   user_data = templatefile("${path.module}/templates/create.sh", {
     type       = var.type
