@@ -17,7 +17,7 @@ locals {
     hcloud_network    = var.network_id
     hcloud_ssh_key    = hcloud_ssh_key.this.id
     hcloud_node_pools = var.node_pools
-    hcloud_cloud_init = base64encode(templatefile("${path.module}/templates/agent.sh", {
+    hcloud_cloud_init = base64encode(templatefile("${path.module}/templates/node.sh", {
       type       = var.type
       channel    = var.channel
       version    = var.version_
@@ -45,7 +45,7 @@ resource "hcloud_server" "this" {
   placement_group_id = hcloud_placement_group.this.id
   labels             = merge(try(each.value.tags, {}), { "hcloud/master" = var.name })
 
-  user_data = templatefile("${path.module}/templates/server.sh", {
+  user_data = templatefile("${path.module}/templates/create.sh", {
     type       = var.type
     channel    = var.channel
     version    = var.version_
