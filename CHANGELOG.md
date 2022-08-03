@@ -1,3 +1,11 @@
+## [1.8.3](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.2...1.8.3) (2022-08-03)
+
+
+### Bug Fixes
+
+* change firewall tf file name ([07e75f9](https://github.com/cktf/terraform-hcloud-rke/commit/07e75f9ec8e5bd6eb47379216371cd412c60f59c))
+* change provisioner bash file names ([8100325](https://github.com/cktf/terraform-hcloud-rke/commit/81003251afcec59d86c52da85f74f5ca41210634))
+
 ## [1.8.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.1...1.8.2) (2022-08-02)
 
 
