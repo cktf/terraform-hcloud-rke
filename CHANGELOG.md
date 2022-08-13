@@ -1,3 +1,10 @@
+## [1.8.4](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.3...1.8.4) (2022-08-13)
+
+
+### Bug Fixes
+
+* enable metrics-server by default ([a3d9df9](https://github.com/cktf/terraform-hcloud-rke/commit/a3d9df931b1d47a91f5a6766af7e72fbefd4f093))
+
 ## [1.8.3](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.2...1.8.3) (2022-08-03)
 
 
