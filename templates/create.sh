@@ -19,7 +19,7 @@ mkdir -p /var/lib/rancher/${type}/server/manifests
 cat <<-EOF | sed -r 's/^ {4}//' | tee /etc/rancher/${type}/config.yaml > /dev/null
     write-kubeconfig-mode: "0644"
     disable-cloud-controller: true
-    disable: ["local-storage", "metrics-server", "servicelb", "traefik"]
+    disable: ["local-storage", "servicelb", "traefik"]
     kube-apiserver-arg: ["enable-bootstrap-token-auth"]
     kubelet-arg: ["cloud-provider=external"]
     tls-san: ["${private_ip}", "${public_ip}"]
