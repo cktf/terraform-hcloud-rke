@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.4...1.9.0) (2022-09-03)
+
+
+### Features
+
+* add linux support to terraform lock file ([0d2b3bc](https://github.com/cktf/terraform-hcloud-rke/commit/0d2b3bc15990596406d309e62d9ecd817cf50c4b))
+
 ## [1.8.4](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.3...1.8.4) (2022-08-13)
 
 
