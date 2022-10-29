@@ -37,7 +37,7 @@ resource "hcloud_server" "this" {
   for_each   = var.masters
   depends_on = [var.network_id]
 
-  name               = "master-${each.key}"
+  name               = "${var.name}-master-${each.key}"
   server_type        = each.value.type
   image              = "ubuntu-20.04"
   location           = each.value.location
