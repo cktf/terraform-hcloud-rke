@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.9.0...1.9.1) (2022-10-29)
+
+
+### Bug Fixes
+
+* change master server prefix ([7f48a33](https://github.com/cktf/terraform-hcloud-rke/commit/7f48a33cc2d4457ceb8b0b60935a4997c52cb0f0))
+
 # [1.9.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.8.4...1.9.0) (2022-09-03)
 
 
