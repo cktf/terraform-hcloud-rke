@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.10.1...1.10.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* change dependency version constraints ([7786d9b](https://github.com/cktf/terraform-hcloud-rke/commit/7786d9b9f5e74067080c3d1a04a8cd4a1cf5f95b))
+
 ## [1.10.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.10.0...1.10.1) (2022-11-10)
 
 
