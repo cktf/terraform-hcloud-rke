@@ -32,7 +32,7 @@ resource "hcloud_firewall" "this" {
   dynamic "apply_to" {
     for_each = var.node_pools
     content {
-      label_selector = "hcloud/node-group=${apply_to.key}"
+      label_selector = "hcloud/node-group=${var.name}-${apply_to.key}"
     }
   }
 }
