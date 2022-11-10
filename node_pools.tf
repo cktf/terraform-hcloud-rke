@@ -1,6 +1,4 @@
 resource "helm_release" "this" {
-  depends_on = [data.k8sbootstrap_auth.this]
-
   name       = "cluster-autoscaler"
   namespace  = "kube-system"
   repository = "https://kubernetes.github.io/autoscaler"
@@ -10,11 +8,22 @@ resource "helm_release" "this" {
   values = [
     yamlencode({
       cloudProvider = "hetzner"
-      autoscalingGroups = [for key, val in var.node_pools : {
-        minSize = val.min_size
-        maxSize = val.max_size
-        name    = "${val.type}:${val.location}:${var.name}-${key}"
+      tolerations = [{
+        effect = "NoSchedule"
+        key    = "node-role.kubernetes.io/master"
       }]
+      affinity = {
+        nodeAffinity = {
+          requiredDuringSchedulingIgnoredDuringExecution = {
+            nodeSelectorTerms = [{
+              matchExpressions = [{
+                key      = "node-role.kubernetes.io/master"
+                operator = "Exists"
+              }]
+            }]
+          }
+        }
+      }
       extraEnv = {
         HCLOUD_IMAGE   = "ubuntu-20.04"
         HCLOUD_TOKEN   = var.hcloud_token
@@ -29,6 +38,11 @@ resource "helm_release" "this" {
           join_token = random_string.agent_token.result
         }))
       }
+      autoscalingGroups = [for key, val in var.node_pools : {
+        minSize = val.min_size
+        maxSize = val.max_size
+        name    = "${val.type}:${val.location}:${var.name}-${key}"
+      }]
     })
   ]
 }
