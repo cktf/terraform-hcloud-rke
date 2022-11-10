@@ -1,3 +1,11 @@
+## [1.10.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.10.0...1.10.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* add typing for node_pools variable ([0d8a020](https://github.com/cktf/terraform-hcloud-rke/commit/0d8a020766d7cf69ff99b833c46b8df640c1791e))
+* install cluster-autoscaler on master nodes ([965967c](https://github.com/cktf/terraform-hcloud-rke/commit/965967cf18f787233151503ce9ef52efcce629b6))
+
 # [1.10.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.9.1...1.10.0) (2022-11-10)
 
 
