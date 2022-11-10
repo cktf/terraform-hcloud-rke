@@ -78,7 +78,12 @@ variable "masters" {
 }
 
 variable "node_pools" {
-  type        = map(any)
+  type = map(object({
+    type     = string
+    location = string
+    min_size = number
+    max_size = number
+  }))
   default     = {}
   sensitive   = false
   description = "Cluster Node Pools"
