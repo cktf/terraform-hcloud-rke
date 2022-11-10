@@ -1,3 +1,15 @@
+# [1.10.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.9.1...1.10.0) (2022-11-10)
+
+
+### Bug Fixes
+
+* apply firewall to node pools ([34b308a](https://github.com/cktf/terraform-hcloud-rke/commit/34b308a0103d6c27b9bfe9db205fa45ef7a5078e))
+
+
+### Features
+
+* install cluster-autoscaler using helm ([979b27a](https://github.com/cktf/terraform-hcloud-rke/commit/979b27a9e89f187f983fc787fe62503bb808eeca))
+
 ## [1.9.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.9.0...1.9.1) (2022-10-29)
 
 
