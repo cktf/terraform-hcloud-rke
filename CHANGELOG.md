@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/cktf/terraform-hcloud-rke/compare/1.10.2...1.10.3) (2022-12-15)
+
+
+### Bug Fixes
+
+* run post_create script before starting service ([0dbdeec](https://github.com/cktf/terraform-hcloud-rke/commit/0dbdeeca49d3b3186b0b3806812e6e469c14193e))
+
 ## [1.10.2](https://github.com/cktf/terraform-hcloud-rke/compare/1.10.1...1.10.2) (2022-11-10)
 
 
