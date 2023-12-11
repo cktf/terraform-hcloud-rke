@@ -1,0 +1,19 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+    name: cluster-autoscaler
+    namespace: kube-system
+spec:
+    repo: https://kubernetes.github.io/autoscaler
+    chart: cluster-autoscaler
+    version: "9.34.0"
+    targetNamespace: kube-system
+    valuesContent: |-
+        cloudProvider: hetzner
+        tolerations
+          type: ClusterIP
+        ingress:
+          enabled: true
+          hostname: www.example.com
+        metrics:
+          enabled: true
