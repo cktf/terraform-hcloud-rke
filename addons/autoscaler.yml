@@ -10,10 +10,23 @@ spec:
     targetNamespace: kube-system
     valuesContent: |-
         cloudProvider: hetzner
-        tolerations
-          type: ClusterIP
-        ingress:
-          enabled: true
-          hostname: www.example.com
-        metrics:
-          enabled: true
+        tolerations:
+          - effect: NoSchedule
+            key: node-role.kubernetes.io/master
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - keey: node-role.kubernetes.io/master
+                      operator: Exists
+        extraEnv:
+          HCLOUD_IMAGE: "${hcloud_image}"
+          HCLOUD_TOKEN: "${hcloud_token}"
+          HCLOUD_NETWORK: "${hcloud_network}"
+          HCLOUD_SSH_KEY: "${hcloud_ssh_key}"
+          HCLOUD_CLOUD_INIT: "${hcloud_cloud_init}"
+        autoscalingGroups:
+          - name: ""
+            minSize: 1
+            maxSize: 10

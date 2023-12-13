@@ -22,17 +22,11 @@ resource "hcloud_firewall" "this" {
     description     = "UDP Internet Traffic"
   }
 
-  dynamic "apply_to" {
-    for_each = var.masters
-    content {
-      server = hcloud_server.this[apply_to.key].id
-    }
+  apply_to {
+    label_selector = "rke/server=${var.name}"
   }
 
-  dynamic "apply_to" {
-    for_each = var.node_pools
-    content {
-      label_selector = "hcloud/node-group=${var.name}-${apply_to.key}"
-    }
+  apply_to {
+    label_selector = "rke/agent=${var.name}"
   }
 }
