@@ -18,8 +18,6 @@ resource "hcloud_server" "this" {
   ssh_keys           = [hcloud_ssh_key.this.id]
   placement_group_id = hcloud_placement_group.this.id
   labels             = { "rke/server" = var.name }
-  delete_protection  = true
-  rebuild_protection = true
 
   connection {
     type        = "ssh"
@@ -78,13 +76,13 @@ module "cluster" {
 
   servers = {
     for key, val in var.servers : key => {
-      channel    = each.value.channel
-      version    = each.value.version
-      registries = each.value.registries
-      configs    = each.value.configs
+      channel    = val.channel
+      version    = val.version
+      registries = val.registries
+      configs    = val.configs
       connection = {
         type        = "ssh"
-        host        = hcloud_server.this[each.key].ipv4_address
+        host        = hcloud_server.this[key].ipv4_address
         user        = "root"
         private_key = tls_private_key.this.private_key_openssh
         timeout     = "4m"
