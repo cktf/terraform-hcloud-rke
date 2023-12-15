@@ -4,9 +4,7 @@
 ![release](https://img.shields.io/github/v/release/cktf/terraform-hcloud-rke?display_name=tag)
 ![license](https://img.shields.io/github/license/cktf/terraform-hcloud-rke)
 
-**RKE** is a Terraform module useful for bootstraping **HA** kubernetes clusters using **k3s** and **rke2** on **HCloud**
-
-These modules will be installed and configured on the cluster:
+This module is a customized version of [terraform-module-rke](https://github.com/cktf/terraform-module-rke) for hetzner cloud. these addons will be installed and configured on the cluster:
 
 -   [CCM](https://github.com/hetznercloud/hcloud-cloud-controller-manager)
 -   [CSI](https://github.com/hetznercloud/csi-driver)
@@ -26,29 +24,44 @@ terraform init
 module "rke" {
   source = "cktf/rke/hcloud"
 
-  name         = "mycluster"
-  network_id   = module.network_hcloud.network_id
-  hcloud_token = "<HCLOUD_TOKEN>"
+  name = "mycluster"
+  type = "k3s"
 
-  masters = {
+  hcloud_zone    = "<ALB_ZONE>"
+  hcloud_token   = "<HCLOUD_TOKEN>"
+  hcloud_network = "<HCLOUD_NETWORK>"
+
+  servers = {
     1 = {
       type     = "cx11"
       location = "fsn1"
-      tags     = {}
+    }
+    2 = {
+      type     = "cx11"
+      location = "fsn1"
+    }
+    3 = {
+      type     = "cx11"
+      location = "fsn1"
     }
   }
 
-  node_pools = {
-    pool1 = {
-      type     = "cx11"
+  agents = {
+    1 = {
+      type     = "cx21"
       location = "fsn1"
-      min_size = 3
-      max_size = 5
     }
-    pool2 = {
-      type     = "cx11"
+    2 = {
+      type     = "cx21"
       location = "fsn1"
-      min_size = 2
+    }
+  }
+
+  pools = {
+    1 = {
+      type     = "cx21"
+      location = "fsn1"
+      min_size = 1
       max_size = 5
     }
   }
