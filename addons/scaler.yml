@@ -26,8 +26,8 @@ spec:
           HCLOUD_NETWORK: "${hcloud_network}"
           HCLOUD_SSH_KEY: "${hcloud_ssh_key}"
         autoscalingGroups:
-        %{ for key, val in agent_pools }
-          - name: "${val.type}:${val.location}:${name}-${key}"
+        %{ for key, val in pools }
+          - name: "${val.type}:${val.location}:${name}-pool-${key}"
             minSize: ${val.min_size}
             maxSize: ${val.max_size}
         %{ endfor }

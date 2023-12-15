@@ -79,10 +79,24 @@ module "cluster" {
       hcloud_token   = var.hcloud_token
       hcloud_network = var.hcloud_network
     })
+    # scaler = templatefile("${path.module}/addons/scaler.yml", {
+    #   name         = var.name
+    #   type         = var.type
+    #   channel      = var.channel
+    #   version      = var.version_
+    #   registries   = var.registries
+    #   configs      = merge(var.configs, local.agent_configs)
+    #   pools        = var.pools
+    #   default_pool = var.pools[keys(var.pools)[0]]
+
+    #   hcloud_image   = data.hcloud_image.this.id
+    #   hcloud_token   = var.hcloud_token
+    #   hcloud_network = var.hcloud_network
+    #   hcloud_ssh_key = hcloud_ssh_key.this.id
+    # })
   })
 
-  server_ip   = hcloud_load_balancer_network.this.ip
-  external_db = ""
+  server_ip = hcloud_load_balancer_network.this.ip
 
   servers = {
     for key, val in var.servers : key => {
@@ -93,7 +107,7 @@ module "cluster" {
       pre_exec   = "sleep 30"
       connection = {
         type        = "ssh"
-        host        = hcloud_server.this[key].ipv4_address
+        host        = hcloud_server.this["server_${key}"].ipv4_address
         user        = "root"
         private_key = tls_private_key.this.private_key_openssh
         timeout     = "4m"
@@ -109,7 +123,7 @@ module "cluster" {
       configs    = merge(val.configs, local.agent_configs)
       connection = {
         type        = "ssh"
-        host        = hcloud_server.this[key].ipv4_address
+        host        = hcloud_server.this["agent_${key}"].ipv4_address
         user        = "root"
         private_key = tls_private_key.this.private_key_openssh
         timeout     = "4m"
