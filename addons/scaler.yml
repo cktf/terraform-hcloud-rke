@@ -18,13 +18,15 @@ spec:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                    - keey: node-role.kubernetes.io/master
+                    - key: node-role.kubernetes.io/master
                       operator: Exists
         extraEnv:
           HCLOUD_IMAGE: "${hcloud_image}"
           HCLOUD_TOKEN: "${hcloud_token}"
           HCLOUD_NETWORK: "${hcloud_network}"
           HCLOUD_SSH_KEY: "${hcloud_ssh_key}"
+          HCLOUD_FIREWALL: "${hcloud_firewall}"
+          HCLOUD_CLOUD_INIT: "${hcloud_cloud_init}"
         autoscalingGroups:
         %{ for key, val in pools }
           - name: "${val.type}:${val.location}:${name}-pool-${key}"
