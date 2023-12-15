@@ -16,6 +16,10 @@ locals {
     "node-ip"       = "$(hostname -I | awk '{print $2}')"
     "node-name"     = "$(hostname -f)"
   }
+  pool_configs = {
+    "server" = "https://${hcloud_load_balancer_network.this.ip}:${module.cluster.port}"
+    "token"  = module.cluster.token
+  }
 }
 
 module "cluster" {
@@ -33,19 +37,18 @@ module "cluster" {
       hcloud_network = var.hcloud_network
     })
     scaler = templatefile("${path.module}/addons/scaler.yml", {
-      name            = var.name
-      pools           = var.pools
-      hcloud_image    = data.hcloud_image.this.id
-      hcloud_token    = var.hcloud_token
-      hcloud_network  = var.hcloud_network
-      hcloud_ssh_key  = hcloud_ssh_key.this.id
-      hcloud_firewall = hcloud_firewall.this.id
+      name           = var.name
+      pools          = var.pools
+      hcloud_image   = data.hcloud_image.this.id
+      hcloud_token   = var.hcloud_token
+      hcloud_network = var.hcloud_network
+      hcloud_ssh_key = hcloud_ssh_key.this.id
       hcloud_cloud_init = base64encode(templatefile("${path.module}/addons/agent.sh", {
         type       = var.type
         channel    = var.channel
         version    = var.version_
         registries = var.registries
-        configs    = merge(var.configs, local.agent_configs)
+        configs    = merge(var.configs, local.agent_configs, local.pool_configs)
         pool = try(var.pools[keys(var.pools)[0]], {
           channel    = null
           version    = null
