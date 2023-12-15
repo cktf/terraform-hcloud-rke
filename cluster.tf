@@ -71,9 +71,7 @@ module "cluster" {
   channel    = var.channel
   version_   = var.version_
   registries = var.registries
-  configs = merge(var.configs, {
-
-  })
+  configs    = var.configs
   addons = merge(var.addons, {
     # autoscaler = templatefile("${path.module}/addons/autoscaler.yml", {
     #   hcloud_image      = "ubuntu-22.04"
@@ -87,14 +85,13 @@ module "cluster" {
     #     name    = "${val.type}:${val.location}:${var.name}-${key}"
     #   }]
     # })
-    # manager = templatefile("${path.module}/addons/manager.yml", {
-    #   cluster_cidr   = ""
-    #   hcloud_token   = var.hcloud_token
-    #   hcloud_network = var.hcloud_network
-    # })
-    # storage = templatefile("${path.module}/addons/storage.yml", {
-    #   hcloud_token = var.hcloud_token
-    # })
+    manager = templatefile("${path.module}/addons/manager.yml", {
+      hcloud_token   = var.hcloud_token
+      hcloud_network = var.hcloud_network
+    })
+    storage = templatefile("${path.module}/addons/storage.yml", {
+      hcloud_token = var.hcloud_token
+    })
   })
 
   server_ip   = hcloud_load_balancer_network.this.ip

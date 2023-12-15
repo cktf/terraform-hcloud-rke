@@ -18,6 +18,6 @@ spec:
             value: "${hcloud_token}"
         networking:
           enabled: true
-          clusterCIDR: ${cluster_cidr}
+          clusterCIDR: 10.42.0.0/16
           network:
-            value: ${hcloud_network}
+            value: "${hcloud_network}"
