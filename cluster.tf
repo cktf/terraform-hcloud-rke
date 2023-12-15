@@ -1,3 +1,23 @@
+locals {
+  server_configs = {
+    "disable-cloud-controller" = "true"
+    "disable"                  = ["local-storage", "servicelb", "traefik"]
+    "tls-san"                  = [hcloud_load_balancer_network.this.ip, hcloud_load_balancer.this.ipv4]
+    # "cluster-cidr" = "${pods_cidr}"
+
+    "kubelet-arg"   = ["cloud-provider=external"]
+    "flannel-iface" = "$(ip a | grep $(hostname -I | awk '{print $2}') | awk '{print $NF}')"
+    "node-ip"       = "$(hostname -I | awk '{print $2}')"
+    "node-name"     = "$(hostname -f)"
+  }
+  agent_configs = {
+    "kubelet-arg"   = ["cloud-provider=external"]
+    "flannel-iface" = "$(ip a | grep $(hostname -I | awk '{print $2}') | awk '{print $NF}')"
+    "node-ip"       = "$(hostname -I | awk '{print $2}')"
+    "node-name"     = "$(hostname -f)"
+  }
+}
+
 data "hcloud_image" "this" {
   name        = "ubuntu-22.04"
   most_recent = true
@@ -9,6 +29,10 @@ resource "hcloud_placement_group" "this" {
 }
 
 resource "hcloud_server" "this" {
+  lifecycle {
+    ignore_changes = [image]
+  }
+
   for_each = var.servers
 
   name               = "${var.name}-server-${each.key}"
@@ -41,13 +65,15 @@ resource "hcloud_server_network" "this" {
 
 module "cluster" {
   source  = "cktf/rke/module"
-  version = "1.19.1"
+  version = "1.20.0"
 
   type       = var.type
   channel    = var.channel
   version_   = var.version_
   registries = var.registries
-  configs    = var.configs
+  configs = merge(var.configs, {
+
+  })
   addons = merge(var.addons, {
     # autoscaler = templatefile("${path.module}/addons/autoscaler.yml", {
     #   hcloud_image      = "ubuntu-22.04"
@@ -79,7 +105,8 @@ module "cluster" {
       channel    = val.channel
       version    = val.version
       registries = val.registries
-      configs    = val.configs
+      configs    = merge(val.configs, local.server_configs)
+      pre_exec   = "sleep 30"
       connection = {
         type        = "ssh"
         host        = hcloud_server.this[key].ipv4_address
