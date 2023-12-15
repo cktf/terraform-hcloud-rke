@@ -1,3 +1,16 @@
+# [1.12.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.11.0...1.12.0) (2023-12-15)
+
+
+### Bug Fixes
+
+* add pool_configs for pool agents ([11efe4d](https://github.com/cktf/terraform-hcloud-rke/commit/11efe4ddce498409ffb5df7afacb28d86da41338))
+* change cluster-cidr to default kubernetes cluster-cidr ([43b3e47](https://github.com/cktf/terraform-hcloud-rke/commit/43b3e47b97d622003375aef04f974e2acfb60902))
+
+
+### Features
+
+* enable cluster-autoscaler chart ([72709f4](https://github.com/cktf/terraform-hcloud-rke/commit/72709f47869888423e8a28c17c1409c1158e656d))
+
 # [1.11.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.10.3...1.11.0) (2023-12-15)
 
 
