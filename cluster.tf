@@ -1,8 +1,7 @@
 locals {
   server_configs = {
     "disable-cloud-controller" = "true"
-    "cluster-cidr"             = "10.42.0.0/16"
-    "service-cidr"             = "10.43.0.0/16"
+    "cluster-cidr"             = "10.244.0.0/16"
     "disable"                  = ["local-storage", "servicelb", "traefik"]
     "tls-san"                  = [hcloud_load_balancer_network.this.ip, hcloud_load_balancer.this.ipv4]
 
