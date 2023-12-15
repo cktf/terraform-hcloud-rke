@@ -1,3 +1,22 @@
+# [1.11.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.10.3...1.11.0) (2023-12-15)
+
+
+### Bug Fixes
+
+* add cluster-cidr and service-cidr configs ([bf9c278](https://github.com/cktf/terraform-hcloud-rke/commit/bf9c278c14ddf5834fa36bdcb24d629ea5f6ebc6))
+* add firewall ssh rule ([206d827](https://github.com/cktf/terraform-hcloud-rke/commit/206d8270a93711d217d560b12a9b3994a4999ef2))
+* add sleep 30 for loadbalancer to be ready ([23fdaf1](https://github.com/cktf/terraform-hcloud-rke/commit/23fdaf12c5afaff32808e132436502c1d3fd2159))
+* change servers and agents key prefix ([352b30d](https://github.com/cktf/terraform-hcloud-rke/commit/352b30dec32ef9d7c4b28d01801cd5944115e9e8))
+* change servers each keyword ([6627165](https://github.com/cktf/terraform-hcloud-rke/commit/6627165ed08fafa8215f1955b3d9b1d82c937dc5))
+
+
+### Features
+
+* add cluster agents support ([9c18867](https://github.com/cktf/terraform-hcloud-rke/commit/9c18867ff5aae9accb286fe6226b52f3cc0cb555))
+* enable storage and manager charts ([e1415be](https://github.com/cktf/terraform-hcloud-rke/commit/e1415be000866c64680eab1a727c624286f161b3))
+* upgrade dependencies ([d522111](https://github.com/cktf/terraform-hcloud-rke/commit/d5221116d14dd004317ce48efd4c44caab622f56))
+* use terraform-module-rke as core ([096751b](https://github.com/cktf/terraform-hcloud-rke/commit/096751bc157b466ee1e95c33d672fb1a14244e19))
+
 ## [1.10.3](https://github.com/cktf/terraform-hcloud-rke/compare/1.10.2...1.10.3) (2022-12-15)
 
 
