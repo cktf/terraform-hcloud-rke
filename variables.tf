@@ -92,7 +92,21 @@ variable "servers" {
   description = "Cluster Servers"
 }
 
-variable "agent_pools" {
+variable "agents" {
+  type = map(object({
+    type       = string
+    location   = string
+    channel    = optional(string)
+    version    = optional(string)
+    registries = optional(any, {})
+    configs    = optional(any, {})
+  }))
+  default     = {}
+  sensitive   = false
+  description = "Cluster Agents"
+}
+
+variable "pools" {
   type = map(object({
     type       = string
     location   = string
@@ -105,5 +119,5 @@ variable "agent_pools" {
   }))
   default     = {}
   sensitive   = false
-  description = "Cluster Agent Pools"
+  description = "Cluster Pools"
 }
