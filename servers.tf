@@ -31,10 +31,20 @@ resource "hcloud_server" "this" {
     ipv4_enabled = (var.hcloud_gateway == "")
     ipv6_enabled = (var.hcloud_gateway == "")
   }
+  network {
+    network_id = var.hcloud_network
+  }
+}
+
+resource "hcloud_server_network" "this" {
+  for_each = hcloud_server.this
+
+  server_id  = each.value.id
+  network_id = var.hcloud_network
 
   connection {
     type                = "ssh"
-    host                = self.ipv4_address
+    host                = self.ip
     user                = "root"
     private_key         = tls_private_key.this.private_key_openssh
     timeout             = "5m"
@@ -48,11 +58,4 @@ resource "hcloud_server" "this" {
   provisioner "remote-exec" {
     inline = ["cloud-init status --wait"]
   }
-}
-
-resource "hcloud_server_network" "this" {
-  for_each = hcloud_server.this
-
-  server_id  = each.value.id
-  network_id = var.hcloud_network
 }
