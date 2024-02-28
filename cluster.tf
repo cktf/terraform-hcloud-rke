@@ -52,6 +52,7 @@ module "cluster" {
         type       = var.type
         channel    = var.channel
         version_   = var.version_
+        gateway    = var.hcloud_gateway
         registries = var.registries
         configs    = merge(var.configs, local.agent_configs, local.pool_configs)
         pool = try(var.pools[keys(var.pools)[0]], {

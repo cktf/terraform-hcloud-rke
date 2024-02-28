@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export gateway="${hcloud_gateway}"
+export gateway="${gateway}"
 ${file("${path}/setup.sh")}
 
 export INSTALL_${upper(type)}_NAME=agent
