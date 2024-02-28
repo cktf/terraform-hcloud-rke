@@ -22,7 +22,7 @@ resource "hcloud_server" "this" {
   server_type        = each.value.type
   location           = each.value.location
   image              = data.hcloud_image.this.id
-  ssh_keys           = [hcloud_ssh_key.this.id]
+  ssh_keys           = [hcloud_ssh_key.this.id] # TODO: external ssh key
   placement_group_id = hcloud_placement_group.this.id
   labels             = { "rke/${each.value.exec}" = var.name }
 
@@ -32,6 +32,7 @@ resource "hcloud_server" "this" {
     user        = "root"
     private_key = tls_private_key.this.private_key_openssh
     timeout     = "4m"
+    # TODO: (private IP only through bastion)
   }
 
   provisioner "remote-exec" {

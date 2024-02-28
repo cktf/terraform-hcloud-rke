@@ -41,12 +41,12 @@ module "cluster" {
       pools          = var.pools
       hcloud_image   = data.hcloud_image.this.id
       hcloud_token   = var.hcloud_token
-      hcloud_network = var.hcloud_network
+      hcloud_network = var.hcloud_network # TODO: (private IP only through bastion)
       hcloud_ssh_key = hcloud_ssh_key.this.id
-      hcloud_cloud_init = base64encode(templatefile("${path.module}/addons/agent.sh", {
+      hcloud_cloud_init = base64encode(templatefile("${path.module}/addons/agent.sh", { # TODO: (private IP only through bastion)
         type       = var.type
         channel    = var.channel
-        version    = var.version_
+        version_   = var.version_
         registries = var.registries
         configs    = merge(var.configs, local.agent_configs, local.pool_configs)
         pool = try(var.pools[keys(var.pools)[0]], {
@@ -54,6 +54,8 @@ module "cluster" {
           version    = null
           registries = {}
           configs    = {}
+          pre_exec   = ""
+          post_exec  = ""
         })
       }))
     })
@@ -67,13 +69,15 @@ module "cluster" {
       version    = val.version
       registries = val.registries
       configs    = merge(val.configs, local.server_configs)
-      pre_exec   = "sleep 30"
+      pre_exec   = val.pre_exec
+      post_exec  = val.post_exec
       connection = {
         type        = "ssh"
         host        = hcloud_server.this["server_${key}"].ipv4_address
         user        = "root"
         private_key = tls_private_key.this.private_key_openssh
         timeout     = "4m"
+        # TODO: (private IP only through bastion)
       }
     }
   }
@@ -84,12 +88,15 @@ module "cluster" {
       version    = val.version
       registries = val.registries
       configs    = merge(val.configs, local.agent_configs)
+      pre_exec   = val.pre_exec
+      post_exec  = val.post_exec
       connection = {
         type        = "ssh"
         host        = hcloud_server.this["agent_${key}"].ipv4_address
         user        = "root"
         private_key = tls_private_key.this.private_key_openssh
         timeout     = "4m"
+        # TODO: (private IP only through bastion)
       }
     }
   }
