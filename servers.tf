@@ -22,17 +22,27 @@ resource "hcloud_server" "this" {
   server_type        = each.value.type
   location           = each.value.location
   image              = data.hcloud_image.this.id
-  ssh_keys           = [hcloud_ssh_key.this.id] # TODO: external ssh key
+  ssh_keys           = [hcloud_ssh_key.this.id]
   placement_group_id = hcloud_placement_group.this.id
   labels             = { "rke/${each.value.exec}" = var.name }
+  user_data          = "" # TODO: default route setup
+
+  public_net {
+    ipv4_enabled = (var.hcloud_gateway == "")
+    ipv6_enabled = (var.hcloud_gateway == "")
+  }
 
   connection {
-    type        = "ssh"
-    host        = self.ipv4_address
-    user        = "root"
-    private_key = tls_private_key.this.private_key_openssh
-    timeout     = "4m"
-    # TODO: (private IP only through bastion)
+    type                = "ssh"
+    host                = self.ipv4_address
+    user                = "root"
+    private_key         = tls_private_key.this.private_key_openssh
+    timeout             = "5m"
+    bastion_host        = try(var.hcloud_bastion.host, null)
+    bastion_port        = try(var.hcloud_bastion.port, null)
+    bastion_user        = try(var.hcloud_bastion.user, null)
+    bastion_password    = try(var.hcloud_bastion.password, null)
+    bastion_private_key = try(var.hcloud_bastion.private_key, null)
   }
 
   provisioner "remote-exec" {

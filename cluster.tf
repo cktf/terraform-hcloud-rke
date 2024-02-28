@@ -44,9 +44,10 @@ module "cluster" {
       pools          = var.pools
       hcloud_image   = data.hcloud_image.this.id
       hcloud_token   = var.hcloud_token
-      hcloud_network = var.hcloud_network # TODO: (private IP only through bastion)
+      hcloud_network = var.hcloud_network
+      hcloud_gateway = var.hcloud_gateway
       hcloud_ssh_key = hcloud_ssh_key.this.id
-      hcloud_cloud_init = base64encode(templatefile("${path.module}/addons/agent.sh", { # TODO: (private IP only through bastion)
+      hcloud_cloud_init = base64encode(templatefile("${path.module}/addons/agent.sh", {
         type       = var.type
         channel    = var.channel
         version_   = var.version_
@@ -75,12 +76,16 @@ module "cluster" {
       pre_exec   = val.pre_exec
       post_exec  = val.post_exec
       connection = {
-        type        = "ssh"
-        host        = hcloud_server.this["server_${key}"].ipv4_address
-        user        = "root"
-        private_key = tls_private_key.this.private_key_openssh
-        timeout     = "4m"
-        # TODO: (private IP only through bastion)
+        type                = "ssh"
+        host                = hcloud_server.this["server_${key}"].ipv4_address
+        user                = "root"
+        private_key         = tls_private_key.this.private_key_openssh
+        timeout             = "5m"
+        bastion_host        = try(var.hcloud_bastion.host, null)
+        bastion_port        = try(var.hcloud_bastion.port, null)
+        bastion_user        = try(var.hcloud_bastion.user, null)
+        bastion_password    = try(var.hcloud_bastion.password, null)
+        bastion_private_key = try(var.hcloud_bastion.private_key, null)
       }
     }
   }
@@ -94,12 +99,16 @@ module "cluster" {
       pre_exec   = val.pre_exec
       post_exec  = val.post_exec
       connection = {
-        type        = "ssh"
-        host        = hcloud_server.this["agent_${key}"].ipv4_address
-        user        = "root"
-        private_key = tls_private_key.this.private_key_openssh
-        timeout     = "4m"
-        # TODO: (private IP only through bastion)
+        type                = "ssh"
+        host                = hcloud_server.this["agent_${key}"].ipv4_address
+        user                = "root"
+        private_key         = tls_private_key.this.private_key_openssh
+        timeout             = "5m"
+        bastion_host        = try(var.hcloud_bastion.host, null)
+        bastion_port        = try(var.hcloud_bastion.port, null)
+        bastion_user        = try(var.hcloud_bastion.user, null)
+        bastion_password    = try(var.hcloud_bastion.password, null)
+        bastion_private_key = try(var.hcloud_bastion.private_key, null)
       }
     }
   }

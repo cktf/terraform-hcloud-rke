@@ -78,6 +78,20 @@ variable "hcloud_network" {
   description = "HCloud Network"
 }
 
+variable "hcloud_gateway" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "HCloud Gateway"
+}
+
+variable "hcloud_bastion" {
+  type        = any
+  default     = ""
+  sensitive   = false
+  description = "HCloud Bastion"
+}
+
 variable "servers" {
   type = map(object({
     type       = string

@@ -26,8 +26,8 @@ spec:
           HCLOUD_NETWORK: "${hcloud_network}"
           HCLOUD_SSH_KEY: "${hcloud_ssh_key}"
           HCLOUD_CLOUD_INIT: "${hcloud_cloud_init}"
-          HCLOUD_PUBLIC_IPV4: true
-          HCLOUD_PUBLIC_IPV6: true
+          HCLOUD_PUBLIC_IPV4: "${hcloud_gateway == ""}"
+          HCLOUD_PUBLIC_IPV6: "${hcloud_gateway == ""}"
         autoscalingGroups:
         %{ for key, val in pools }
           - name: "${val.type}:${val.location}:${name}-pool-${key}"
