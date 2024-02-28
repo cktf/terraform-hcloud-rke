@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export gateway="${hcloud_gateway}"
+${file("${path}/setup.sh")}
+
 export INSTALL_${upper(type)}_NAME=agent
 export INSTALL_${upper(type)}_EXEC=agent
 export INSTALL_${upper(type)}_CHANNEL=${pool.channel != null ? pool.channel : channel}

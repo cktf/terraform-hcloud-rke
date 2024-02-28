@@ -9,13 +9,13 @@ locals {
 
     "flannel-backend" = "none"
     "kubelet-arg"     = ["cloud-provider=external"]
-    "node-ip"         = "$(hostname -I | awk '{print $2}')"
+    "node-ip"         = "$(hostname -I | awk '{print $1}')"
     "node-name"       = "$(hostname -f)"
   }
   agent_configs = {
     "flannel-backend" = "none"
     "kubelet-arg"     = ["cloud-provider=external"]
-    "node-ip"         = "$(hostname -I | awk '{print $2}')"
+    "node-ip"         = "$(hostname -I | awk '{print $1}')"
     "node-name"       = "$(hostname -f)"
   }
   pool_configs = {
@@ -48,6 +48,7 @@ module "cluster" {
       hcloud_gateway = var.hcloud_gateway
       hcloud_ssh_key = hcloud_ssh_key.this.id
       hcloud_cloud_init = base64encode(templatefile("${path.module}/addons/agent.sh", {
+        path       = "${path.module}/addons"
         type       = var.type
         channel    = var.channel
         version_   = var.version_
