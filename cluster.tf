@@ -1,20 +1,22 @@
 locals {
   server_configs = {
     "disable-cloud-controller" = "true"
+    "disable-network-policy"   = "true"
     "cluster-cidr"             = "10.244.0.0/16"
+    "service-cidr"             = "10.245.0.0/16"
     "disable"                  = ["local-storage", "servicelb", "traefik"]
     "tls-san"                  = [hcloud_load_balancer_network.this.ip, hcloud_load_balancer.this.ipv4]
 
-    "kubelet-arg"   = ["cloud-provider=external"]
-    "flannel-iface" = "$(ip a | grep $(hostname -I | awk '{print $2}') | awk '{print $NF}')"
-    "node-ip"       = "$(hostname -I | awk '{print $2}')"
-    "node-name"     = "$(hostname -f)"
+    "flannel-backend" = "none"
+    "kubelet-arg"     = ["cloud-provider=external"]
+    "node-ip"         = "$(hostname -I | awk '{print $2}')"
+    "node-name"       = "$(hostname -f)"
   }
   agent_configs = {
-    "kubelet-arg"   = ["cloud-provider=external"]
-    "flannel-iface" = "$(ip a | grep $(hostname -I | awk '{print $2}') | awk '{print $NF}')"
-    "node-ip"       = "$(hostname -I | awk '{print $2}')"
-    "node-name"     = "$(hostname -f)"
+    "flannel-backend" = "none"
+    "kubelet-arg"     = ["cloud-provider=external"]
+    "node-ip"         = "$(hostname -I | awk '{print $2}')"
+    "node-name"       = "$(hostname -f)"
   }
   pool_configs = {
     "server" = "https://${hcloud_load_balancer_network.this.ip}:${module.cluster.port}"
@@ -32,6 +34,7 @@ module "cluster" {
   registries = var.registries
   configs    = var.configs
   addons = merge(var.addons, {
+    cilium = templatefile("${path.module}/addons/cilium.yml", {})
     driver = templatefile("${path.module}/addons/driver.yml", {
       hcloud_token   = var.hcloud_token
       hcloud_network = var.hcloud_network

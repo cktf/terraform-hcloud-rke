@@ -1,0 +1,13 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+    name: cilium-cni
+    namespace: kube-system
+spec:
+    repo: https://helm.cilium.io/
+    chart: cilium
+    version: "1.15.1"
+    targetNamespace: kube-system
+    valuesContent: |-
+        operator:
+          replicas: 1
