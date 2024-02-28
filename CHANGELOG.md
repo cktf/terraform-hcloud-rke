@@ -1,3 +1,19 @@
+# [1.13.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.12.0...1.13.0) (2024-02-28)
+
+
+### Bug Fixes
+
+* add hcloud_gateway to agent.sh ([d18310b](https://github.com/cktf/terraform-hcloud-rke/commit/d18310b38e4891be134307319617b592c8e446bf))
+* change CI script ([363a40d](https://github.com/cktf/terraform-hcloud-rke/commit/363a40dc9de45d2d60d23af8769ca5009d4fafd6))
+
+
+### Features
+
+* add hcloud_gateway variable for private networks ([f276859](https://github.com/cktf/terraform-hcloud-rke/commit/f2768594791ab18f44de7f1378bcd9888d71a10f))
+* add pre_exec, post_exec scripts for servers and agents and pools ([05a4a95](https://github.com/cktf/terraform-hcloud-rke/commit/05a4a951ce2a816c2c99e17e02edfb620279deb5))
+* add private network route setup script ([f9f1230](https://github.com/cktf/terraform-hcloud-rke/commit/f9f1230c795f18a2b143d13c022a4383f5ddd227))
+* install cilium instead of flannel ([21f7e84](https://github.com/cktf/terraform-hcloud-rke/commit/21f7e8468453529fa017603a2b58f3f5f2bbbba1))
+
 # [1.12.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.11.0...1.12.0) (2023-12-15)
 
 
