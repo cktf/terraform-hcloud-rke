@@ -1,22 +1,19 @@
 locals {
   server_configs = {
     "disable-cloud-controller" = "true"
-    "disable-network-policy"   = "true"
-    "cluster-cidr"             = "10.244.0.0/16"
-    "service-cidr"             = "10.245.0.0/16"
-    "disable"                  = ["local-storage", "servicelb", "traefik"]
-    "tls-san"                  = [hcloud_load_balancer_network.this.ip, hcloud_load_balancer.this.ipv4]
+    # "disable-network-policy"   = "true"
+    # "flannel-backend"          = "none"
+    "cluster-cidr" = "10.244.0.0/16"
+    "service-cidr" = "10.245.0.0/16"
+    "disable"      = ["local-storage", "servicelb", "traefik"]
+    "tls-san"      = [hcloud_load_balancer_network.this.ip, hcloud_load_balancer.this.ipv4]
 
-    "flannel-backend" = "none"
-    "kubelet-arg"     = ["cloud-provider=external"]
-    "node-ip"         = "$(hostname -I | awk '{print $1}')"
-    "node-name"       = "$(hostname -f)"
+    "kubelet-arg" = ["cloud-provider=external"]
+    "node-ip"     = (var.hcloud_gateway == "") ? "$(hostname -I | awk '{print $2}')" : "$(hostname -I | awk '{print $1}')"
   }
   agent_configs = {
-    "flannel-backend" = "none"
-    "kubelet-arg"     = ["cloud-provider=external"]
-    "node-ip"         = "$(hostname -I | awk '{print $1}')"
-    "node-name"       = "$(hostname -f)"
+    "kubelet-arg" = ["cloud-provider=external"]
+    "node-ip"     = (var.hcloud_gateway == "") ? "$(hostname -I | awk '{print $2}')" : "$(hostname -I | awk '{print $1}')"
   }
   pool_configs = {
     "server" = "https://${hcloud_load_balancer_network.this.ip}:${module.cluster.port}"
@@ -25,8 +22,9 @@ locals {
 }
 
 module "cluster" {
-  source  = "cktf/rke/module"
-  version = "1.20.1"
+  source = "github.com/cktf/terraform-module-rke"
+  #   source  = "cktf/rke/module"
+  #   version = "1.20.3"
 
   type       = var.type
   channel    = var.channel
@@ -34,7 +32,6 @@ module "cluster" {
   registries = var.registries
   configs    = var.configs
   addons = merge(var.addons, {
-    cilium = templatefile("${path.module}/addons/cilium.yml", {})
     driver = templatefile("${path.module}/addons/driver.yml", {
       hcloud_token   = var.hcloud_token
       hcloud_network = var.hcloud_network
@@ -79,7 +76,7 @@ module "cluster" {
       post_exec  = val.post_exec
       connection = {
         type                = "ssh"
-        host                = hcloud_server.this["server_${key}"].ipv4_address
+        host                = (var.hcloud_gateway == "") ? hcloud_server.this["server_${key}"].ipv4_address : hcloud_server_network.this["server_${key}"].ip
         user                = "root"
         private_key         = tls_private_key.this.private_key_openssh
         timeout             = "5m"
@@ -102,7 +99,7 @@ module "cluster" {
       post_exec  = val.post_exec
       connection = {
         type                = "ssh"
-        host                = hcloud_server.this["agent_${key}"].ipv4_address
+        host                = (var.hcloud_gateway == "") ? hcloud_server.this["agent_${key}"].ipv4_address : hcloud_server_network.this["agent_${key}"].ip
         user                = "root"
         private_key         = tls_private_key.this.private_key_openssh
         timeout             = "5m"

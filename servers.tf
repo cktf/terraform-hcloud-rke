@@ -25,7 +25,10 @@ resource "hcloud_server" "this" {
   ssh_keys           = [hcloud_ssh_key.this.id]
   placement_group_id = hcloud_placement_group.this.id
   labels             = { "rke/${each.value.exec}" = var.name }
-  user_data          = templatefile("${path.module}/addons/setup.sh", { gateway = var.hcloud_gateway })
+
+  user_data = templatefile("${path.module}/addons/setup.sh", {
+    gateway = var.hcloud_gateway
+  })
 
   public_net {
     ipv4_enabled = (var.hcloud_gateway == "")
@@ -33,6 +36,7 @@ resource "hcloud_server" "this" {
   }
   network {
     network_id = var.hcloud_network
+    alias_ips  = []
   }
 }
 
@@ -44,7 +48,7 @@ resource "hcloud_server_network" "this" {
 
   connection {
     type                = "ssh"
-    host                = self.ip
+    host                = (var.hcloud_gateway == "") ? each.value.ipv4_address : self.ip
     user                = "root"
     private_key         = tls_private_key.this.private_key_openssh
     timeout             = "5m"

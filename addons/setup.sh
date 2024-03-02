@@ -2,12 +2,9 @@
 
 [ -z "${gateway}" ] && exit 0
 
-export IP=$(hostname -I | awk '{print $1}')
-export IFACE=$(ip -br -4 a sh | grep $IP | awk '{print $1}')
-
 cat <<-EOF > /etc/systemd/network/default.network
 [Match]
-Name=$IFACE
+Name=$(ip a | grep $(hostname -I | awk '{print $1}') | awk '{print $NF}')
 
 [Network]
 DHCP=ipv4
