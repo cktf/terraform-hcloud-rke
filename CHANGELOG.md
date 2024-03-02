@@ -1,3 +1,15 @@
+# [1.14.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.13.0...1.14.0) (2024-03-02)
+
+
+### Bug Fixes
+
+* add wait provisioner to hcloud_server_network ([597fd44](https://github.com/cktf/terraform-hcloud-rke/commit/597fd4434ba529167142dddd775687df9f77e861))
+
+
+### Features
+
+* disable cilium and use default flannel ([39d8a51](https://github.com/cktf/terraform-hcloud-rke/commit/39d8a515f9d7c02b52143cbea2a855f7c4c1c04c))
+
 # [1.13.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.12.0...1.13.0) (2024-02-28)
 
 
