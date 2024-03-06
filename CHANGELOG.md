@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.15.0...1.15.1) (2024-03-06)
+
+
+### Bug Fixes
+
+* upgrade cluster module to 1.23.1 ([bc1116a](https://github.com/cktf/terraform-hcloud-rke/commit/bc1116ad603b1703854e11d0c02b18767da5c819))
+
 # [1.15.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.14.0...1.15.0) (2024-03-06)
 
 
