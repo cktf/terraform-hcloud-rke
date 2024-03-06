@@ -16,7 +16,7 @@ locals {
   }
   pool_configs = {
     "server" = "https://${hcloud_load_balancer_network.this.ip}:${module.cluster.port}"
-    "token"  = module.cluster.token
+    "token"  = var.agent_token
   }
 }
 

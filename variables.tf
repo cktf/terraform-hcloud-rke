@@ -72,8 +72,8 @@ variable "server_token" {
 }
 
 variable "ssh_keys" {
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
   sensitive   = false
   description = "Cluster SSH Keys"
 }
