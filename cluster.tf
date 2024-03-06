@@ -1,14 +1,11 @@
 locals {
   server_configs = {
     "disable-cloud-controller" = "true"
-    # "disable-network-policy"   = "true" # Cilium + K3s
-    # "disable-kube-proxy"       = "true" # Cilium
-    # "flannel-backend"          = "none" # K3s
-    "cluster-cidr" = "10.244.0.0/16"
-    "service-cidr" = "10.245.0.0/16"
-    "cluster-dns"  = "10.245.0.10"
-    "disable"      = ["local-storage", "metrics-server", "servicelb", "traefik"]
-    "tls-san"      = [hcloud_load_balancer_network.this.ip, hcloud_load_balancer.this.ipv4]
+    "cluster-cidr"             = "10.244.0.0/16"
+    "service-cidr"             = "10.245.0.0/16"
+    "cluster-dns"              = "10.245.0.10"
+    "tls-san"                  = [hcloud_load_balancer_network.this.ip, hcloud_load_balancer.this.ipv4]
+    "disable"                  = ["local-storage", "metrics-server", "traefik", "servicelb", "rke2-metrics-server", "rke2-ingress-nginx"]
 
     "kubelet-arg" = ["cloud-provider=external"]
     "node-ip"     = (var.hcloud_gateway == "") ? "$(hostname -I | awk '{print $2}')" : "$(hostname -I | awk '{print $1}')"
