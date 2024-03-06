@@ -1,3 +1,16 @@
+# [1.15.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.14.0...1.15.0) (2024-03-06)
+
+
+### Bug Fixes
+
+* change disables ([d482e95](https://github.com/cktf/terraform-hcloud-rke/commit/d482e95f3e30279c3c2dc3f128dfe9a7be78ec1e))
+* syntax problems ([49746d8](https://github.com/cktf/terraform-hcloud-rke/commit/49746d8de5dd3a0326a8e98bf8c4802cfbafde58))
+
+
+### Features
+
+* add ssh_keys variable ([4b2a40f](https://github.com/cktf/terraform-hcloud-rke/commit/4b2a40f20536ab6eedce6563a92d0a5ac339834c))
+
 # [1.14.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.13.0...1.14.0) (2024-03-02)
 
 
