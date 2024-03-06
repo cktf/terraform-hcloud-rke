@@ -1,11 +1,13 @@
 locals {
   server_configs = {
     "disable-cloud-controller" = "true"
-    # "disable-network-policy"   = "true"
-    # "flannel-backend"          = "none"
+    # "disable-network-policy"   = "true" # Cilium + K3s
+    # "disable-kube-proxy"       = "true" # Cilium
+    # "flannel-backend"          = "none" # K3s
     "cluster-cidr" = "10.244.0.0/16"
     "service-cidr" = "10.245.0.0/16"
-    "disable"      = ["local-storage", "servicelb", "traefik"]
+    "cluster-dns"  = "10.245.0.10"
+    "disable"      = ["local-storage", "metrics-server", "servicelb", "traefik"]
     "tls-san"      = [hcloud_load_balancer_network.this.ip, hcloud_load_balancer.this.ipv4]
 
     "kubelet-arg" = ["cloud-provider=external"]
@@ -22,9 +24,8 @@ locals {
 }
 
 module "cluster" {
-  source = "github.com/cktf/terraform-module-rke"
-  #   source  = "cktf/rke/module"
-  #   version = "1.20.3"
+  source  = "cktf/rke/module"
+  version = "1.23.0"
 
   type       = var.type
   channel    = var.channel
@@ -64,7 +65,9 @@ module "cluster" {
     })
   })
 
-  server_ip = hcloud_load_balancer_network.this.ip
+  server_ip    = hcloud_load_balancer_network.this.ip
+  agent_token  = var.agent_token
+  server_token = var.server_token
 
   servers = {
     for key, val in var.servers : key => {
@@ -78,7 +81,7 @@ module "cluster" {
         type                = "ssh"
         host                = (var.hcloud_gateway == "") ? hcloud_server.this["server_${key}"].ipv4_address : hcloud_server_network.this["server_${key}"].ip
         user                = "root"
-        private_key         = tls_private_key.this.private_key_openssh
+        private_key         = var.private_key
         timeout             = "5m"
         bastion_host        = try(var.hcloud_bastion.host, null)
         bastion_port        = try(var.hcloud_bastion.port, null)
@@ -101,7 +104,7 @@ module "cluster" {
         type                = "ssh"
         host                = (var.hcloud_gateway == "") ? hcloud_server.this["agent_${key}"].ipv4_address : hcloud_server_network.this["agent_${key}"].ip
         user                = "root"
-        private_key         = tls_private_key.this.private_key_openssh
+        private_key         = var.private_key
         timeout             = "5m"
         bastion_host        = try(var.hcloud_bastion.host, null)
         bastion_port        = try(var.hcloud_bastion.port, null)

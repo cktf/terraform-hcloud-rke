@@ -57,6 +57,41 @@ variable "addons" {
   description = "Cluster AddOns"
 }
 
+variable "agent_token" {
+  type        = string
+  default     = ""
+  sensitive   = true
+  description = "Cluster Agent Token"
+}
+
+variable "server_token" {
+  type        = string
+  default     = ""
+  sensitive   = true
+  description = "Cluster Server Token"
+}
+
+variable "ssh_keys" {
+  type        = string
+  default     = ""
+  sensitive   = false
+  description = "Cluster SSH Keys"
+}
+
+variable "public_key" {
+  type        = string
+  default     = ""
+  sensitive   = true
+  description = "Cluster Public Key"
+}
+
+variable "private_key" {
+  type        = string
+  default     = ""
+  sensitive   = true
+  description = "Cluster Private Key"
+}
+
 variable "hcloud_zone" {
   type        = string
   default     = "eu-central"

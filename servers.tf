@@ -3,6 +3,11 @@ data "hcloud_image" "this" {
   most_recent = true
 }
 
+resource "hcloud_ssh_key" "this" {
+  name       = var.name
+  public_key = var.public_key
+}
+
 resource "hcloud_placement_group" "this" {
   name = var.name
   type = "spread"
@@ -22,9 +27,9 @@ resource "hcloud_server" "this" {
   server_type        = each.value.type
   location           = each.value.location
   image              = data.hcloud_image.this.id
-  ssh_keys           = [hcloud_ssh_key.this.id]
-  placement_group_id = hcloud_placement_group.this.id
   labels             = { "rke/${each.value.exec}" = var.name }
+  ssh_keys           = concat(var.ssh_keys, [hcloud_ssh_key.this.id])
+  placement_group_id = (each.value.exec == "server") ? hcloud_placement_group.this.id : null
 
   user_data = templatefile("${path.module}/addons/setup.sh", {
     gateway = var.hcloud_gateway
@@ -50,7 +55,7 @@ resource "hcloud_server_network" "this" {
     type                = "ssh"
     host                = (var.hcloud_gateway == "") ? each.value.ipv4_address : self.ip
     user                = "root"
-    private_key         = tls_private_key.this.private_key_openssh
+    private_key         = var.private_key
     timeout             = "5m"
     bastion_host        = try(var.hcloud_bastion.host, null)
     bastion_port        = try(var.hcloud_bastion.port, null)
