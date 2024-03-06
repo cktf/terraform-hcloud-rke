@@ -27,6 +27,12 @@ module "rke" {
   name = "mycluster"
   type = "k3s"
 
+  agent_token  = "<REDACTED>"
+  server_token = "<REDACTED>"
+
+  public_key  = "<REDACTED>"
+  private_key = "<REDACTED>"
+
   hcloud_zone    = "<ALB_ZONE>"
   hcloud_token   = "<HCLOUD_TOKEN>"
   hcloud_network = "<HCLOUD_NETWORK>"
