@@ -22,7 +22,7 @@ locals {
 
 module "cluster" {
   source  = "cktf/rke/module"
-  version = "1.23.0"
+  version = "1.23.1"
 
   type       = var.type
   channel    = var.channel
