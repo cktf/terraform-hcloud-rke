@@ -5,7 +5,7 @@ locals {
     "service-cidr"             = "10.245.0.0/16"
     "cluster-dns"              = "10.245.0.10"
     "tls-san"                  = [hcloud_load_balancer_network.this.ip, hcloud_load_balancer.this.ipv4]
-    "disable"                  = ["local-storage", "metrics-server", "traefik", "servicelb", "rke2-metrics-server", "rke2-ingress-nginx"]
+    "disable"                  = ["local-storage", "servicelb", "traefik", "rke2-ingress-nginx"]
 
     "kubelet-arg" = ["cloud-provider=external"]
     "node-ip"     = (var.hcloud_gateway == "") ? "$(hostname -I | awk '{print $2}')" : "$(hostname -I | awk '{print $1}')"
