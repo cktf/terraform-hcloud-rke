@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.15.1...1.16.0) (2024-03-10)
+
+
+### Features
+
+* enable metrics-server by default ([7d65d3b](https://github.com/cktf/terraform-hcloud-rke/commit/7d65d3ba41612a5739452ed1fd65c0ef11a25249))
+
 ## [1.15.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.15.0...1.15.1) (2024-03-06)
 
 
