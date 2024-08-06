@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.16.0...1.17.0) (2024-08-06)
+
+
+### Features
+
+* migrate cluster provisioner to terraform-hcloud-cluster ([343302e](https://github.com/cktf/terraform-hcloud-rke/commit/343302e6d8135030ea51b420b7133a498a7b9b10))
+
 # [1.16.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.15.1...1.16.0) (2024-03-10)
 
 
