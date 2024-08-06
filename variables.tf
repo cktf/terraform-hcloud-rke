@@ -122,7 +122,7 @@ variable "hcloud_gateway" {
 
 variable "hcloud_bastion" {
   type        = any
-  default     = ""
+  default     = {}
   sensitive   = false
   description = "HCloud Bastion"
 }

@@ -4,7 +4,7 @@
 ![release](https://img.shields.io/github/v/release/cktf/terraform-hcloud-rke?display_name=tag)
 ![license](https://img.shields.io/github/license/cktf/terraform-hcloud-rke)
 
-This module is a customized version of [terraform-module-rke](https://github.com/cktf/terraform-module-rke) for hetzner cloud. these addons will be installed and configured on the cluster:
+This module is a combination of [terraform-hcloud-cluster](https://github.com/cktf/terraform-hcloud-cluster) and [terraform-module-rke](https://github.com/cktf/terraform-module-rke) for provisioning RKE cluster in Hetzner Cloud. these addons will be installed and configured on the cluster:
 
 -   [CCM](https://github.com/hetznercloud/hcloud-cloud-controller-manager)
 -   [CSI](https://github.com/hetznercloud/csi-driver)
