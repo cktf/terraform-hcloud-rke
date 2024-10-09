@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.17.0...1.17.1) (2024-10-09)
+
+
+### Bug Fixes
+
+* upgrade CI/CD ([9e0cf09](https://github.com/cktf/terraform-hcloud-rke/commit/9e0cf09756d729c2e6cf267d5a447cb992e16362))
+
 # [1.17.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.16.0...1.17.0) (2024-08-06)
 
 
