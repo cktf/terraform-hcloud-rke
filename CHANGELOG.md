@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.17.1...1.18.0) (2025-02-13)
+
+
+### Features
+
+* change precedence of configs merge ([01209d9](https://github.com/cktf/terraform-hcloud-rke/commit/01209d94e69420c7c76172dffe37eb0fefbbc0e2))
+
 ## [1.17.1](https://github.com/cktf/terraform-hcloud-rke/compare/1.17.0...1.17.1) (2024-10-09)
 
 
