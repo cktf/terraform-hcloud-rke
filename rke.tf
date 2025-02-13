@@ -49,7 +49,7 @@ module "rke" {
         version_   = var.version_
         gateway    = var.hcloud_gateway
         registries = var.registries
-        configs    = merge(var.configs, local.agent_configs, local.pool_configs)
+        configs    = merge(local.agent_configs, local.pool_configs, var.configs)
         pool = try(var.pools[keys(var.pools)[0]], {
           channel    = null
           version    = null
@@ -71,7 +71,7 @@ module "rke" {
       channel    = val.channel
       version    = val.version
       registries = val.registries
-      configs    = merge(val.configs, local.server_configs)
+      configs    = merge(local.server_configs, val.configs)
       pre_exec   = val.pre_exec
       post_exec  = val.post_exec
       connection = module.cluster.servers["server-${key}"]
@@ -83,7 +83,7 @@ module "rke" {
       channel    = val.channel
       version    = val.version
       registries = val.registries
-      configs    = merge(val.configs, local.agent_configs)
+      configs    = merge(local.agent_configs, val.configs)
       pre_exec   = val.pre_exec
       post_exec  = val.post_exec
       connection = module.cluster.servers["agent-${key}"]
