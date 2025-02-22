@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.18.0...1.19.0) (2025-02-22)
+
+
+### Features
+
+* add new CI ([6888382](https://github.com/cktf/terraform-hcloud-rke/commit/68883824b9fcb2077015ea853c202541598ca3a0))
+
 # [1.18.0](https://github.com/cktf/terraform-hcloud-rke/compare/1.17.1...1.18.0) (2025-02-13)
 
 
