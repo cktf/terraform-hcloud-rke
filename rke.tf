@@ -22,7 +22,7 @@ locals {
 
 module "rke" {
   source  = "cktf/rke/module"
-  version = "1.23.1"
+  version = "1.23.2"
 
   type       = var.type
   channel    = var.channel
