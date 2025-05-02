@@ -1,6 +1,6 @@
 module "cluster" {
   source  = "cktf/cluster/hcloud"
-  version = "1.3.0"
+  version = "1.24.0"
 
   name    = var.name
   bastion = merge(var.hcloud_bastion, { gateway = var.hcloud_gateway })
